@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NADIMI · ნადიმი · Wine of Symposium</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --terracotta: #C4622D;
+  --ochre:      #D4A853;
+  --ink:        #1C1610;
+  --parchment:  #F2E8D5;
+  --sand:       #E0CEAA;
+  --dust:       #9B8A6E;
+  --olive:      #4A5240;
+  --clay:       #7A4830;
+  --cream:      #FAF5EC;
+  --dark-ink:   #120E08;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Cormorant Garamond', serif; background: var(--cream); color: var(--ink); overflow-x: hidden; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 60px;
+  background: rgba(250,245,236,0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(196,98,45,0.12);
+}
+.nav-logo { display: flex; flex-direction: column; line-height: 1; text-decoration: none; }
+.nav-logo-en { font-family: 'Cinzel', serif; font-size: 20px; letter-spacing: 0.3em; color: var(--terracotta); }
+.nav-logo-ge { font-size: 13px; color: var(--dust); letter-spacing: 0.15em; font-style: italic; }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.22em; color: var(--ink); text-decoration: none; text-transform: uppercase; opacity: 0.65; transition: opacity 0.3s, color 0.3s; }
+.nav-links a:hover { opacity: 1; color: var(--terracotta); }
+
+.hero { min-height: 100vh; background: var(--ink); display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
+.hero-left { display: flex; flex-direction: column; justify-content: center; padding: 140px 70px 80px; position: relative; z-index: 2; }
+.hero-geo { font-size: 13px; letter-spacing: 0.3em; color: var(--ochre); margin-bottom: 10px; font-style: italic; opacity: 0; animation: fadeUp 1s ease 0.4s forwards; }
+.hero-title { font-family: 'Cinzel', serif; font-size: clamp(60px, 8vw, 110px); font-weight: 400; line-height: 0.95; letter-spacing: 0.06em; color: var(--parchment); margin-bottom: 32px; opacity: 0; animation: fadeUp 1s ease 0.6s forwards; }
+.hero-meaning { font-size: 17px; font-style: italic; color: var(--dust); line-height: 1.7; max-width: 380px; margin-bottom: 52px; border-left: 2px solid var(--terracotta); padding-left: 20px; opacity: 0; animation: fadeUp 1s ease 0.8s forwards; }
+.hero-meaning strong { color: var(--sand); font-style: normal; font-weight: 400; }
+.hero-cta { display: inline-flex; align-items: center; gap: 14px; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ink); background: var(--ochre); padding: 15px 36px; text-decoration: none; width: fit-content; transition: background 0.3s, transform 0.3s; opacity: 0; animation: fadeUp 1s ease 1s forwards; }
+.hero-cta:hover { background: var(--parchment); transform: translateX(4px); }
+.hero-cta::after { content: '→'; font-size: 16px; }
+.hero-right { position: relative; background: linear-gradient(135deg, #2A1F12 0%, #1C1610 60%); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.hero-circle { position: absolute; border-radius: 50%; border: 1px solid rgba(212,168,83,0.1); }
+.hero-circle:nth-child(1) { width: 500px; height: 500px; }
+.hero-circle:nth-child(2) { width: 360px; height: 360px; border-color: rgba(212,168,83,0.07); }
+.hero-circle:nth-child(3) { width: 220px; height: 220px; border-color: rgba(212,168,83,0.13); }
+.bottle-svg { width: 220px; position: relative; z-index: 3; opacity: 0; animation: fadeUp 1.2s ease 1s forwards; }
+
+section { padding: 110px 60px; }
+.container { max-width: 1160px; margin: 0 auto; }
+.label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.45em; color: var(--terracotta); text-transform: uppercase; display: block; margin-bottom: 18px; }
+.title { font-family: 'Cinzel', serif; font-size: clamp(28px, 4vw, 48px); font-weight: 400; line-height: 1.15; color: var(--ink); margin-bottom: 24px; }
+.body-text { font-size: 18px; line-height: 1.9; color: var(--dust); max-width: 560px; }
+
+.story { background: var(--parchment); }
+.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.story-frame { aspect-ratio: 4/5; background: linear-gradient(145deg, rgba(196,98,45,0.08), rgba(212,168,83,0.08)); border: 1px solid rgba(196,98,45,0.2); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.story-frame::before { content: ''; position: absolute; inset: 12px; border: 1px solid rgba(196,98,45,0.1); }
+.story-geo-text { font-size: 80px; color: var(--terracotta); opacity: 0.12; line-height: 1; font-style: italic; font-family: 'Cormorant Garamond', serif; display: block; margin-bottom: 16px; }
+.city-badge { display: inline-block; font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.35em; color: var(--terracotta); border: 1px solid rgba(196,98,45,0.4); padding: 6px 16px; text-transform: uppercase; }
+.stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 52px; border-top: 1px solid rgba(196,98,45,0.15); }
+.stat { padding: 28px 0; border-right: 1px solid rgba(196,98,45,0.15); text-align: center; }
+.stat:last-child { border-right: none; }
+.stat-n { font-family: 'Cinzel', serif; font-size: 36px; color: var(--terracotta); display: block; margin-bottom: 4px; }
+.stat-l { font-size: 12px; letter-spacing: 0.1em; color: var(--dust); text-transform: uppercase; }
+
+.wines { background: var(--ink); }
+.wines .title { color: var(--parchment); }
+.wines .label { color: var(--ochre); }
+.wines-header { text-align: center; max-width: 600px; margin: 0 auto 70px; }
+.wines-header .body-text { margin: 0 auto; text-align: center; color: var(--dust); }
+.wines-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(212,168,83,0.1); }
+.wine-card { background: #1C1610; padding: 48px 36px; position: relative; transition: background 0.4s; }
+.wine-card:hover { background: #231a0f; }
+.wine-card-top { border-bottom: 1px solid rgba(212,168,83,0.12); padding-bottom: 24px; margin-bottom: 24px; }
+.wine-color-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 8px; vertical-align: middle; }
+.wine-type-label { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.3em; color: var(--ochre); text-transform: uppercase; vertical-align: middle; }
+.wine-name { font-size: clamp(26px, 2.5vw, 36px); font-style: italic; color: var(--parchment); margin: 14px 0 4px; line-height: 1.1; }
+.wine-geo { font-size: 13px; color: var(--dust); letter-spacing: 0.1em; font-style: italic; }
+.wine-desc { font-size: 15px; line-height: 1.85; color: var(--dust); margin: 20px 0 24px; }
+.tasting-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 28px; }
+.taste-chip { font-size: 10px; letter-spacing: 0.08em; padding: 3px 10px; border: 1px solid rgba(212,168,83,0.25); color: rgba(212,168,83,0.7); text-transform: uppercase; }
+.wine-footer { display: flex; justify-content: space-between; align-items: flex-end; }
+.wine-price { font-family: 'Cormorant Garamond', serif; font-size: 30px; color: var(--parchment); }
+.wine-year { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.2em; color: var(--dust); }
+
+.meaning { background: var(--terracotta); text-align: center; padding: 100px 60px; }
+.meaning-word { font-size: clamp(48px, 9vw, 120px); font-style: italic; color: rgba(255,255,255,0.1); line-height: 1; margin-bottom: -30px; display: block; font-family: 'Cormorant Garamond', serif; }
+.meaning-quote { font-size: clamp(22px, 3.5vw, 40px); font-style: italic; color: var(--parchment); line-height: 1.5; max-width: 780px; margin: 0 auto 28px; position: relative; }
+.meaning-sub { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.4em; color: rgba(242,232,213,0.5); text-transform: uppercase; }
+.meaning-border { width: 60px; height: 1px; background: rgba(242,232,213,0.3); margin: 24px auto; }
+
+.batumi { background: var(--cream); }
+.batumi-inner { display: grid; grid-template-columns: 1fr 1.1fr; gap: 90px; align-items: center; }
+.batumi-map { background: var(--parchment); border: 1px solid rgba(196,98,45,0.15); aspect-ratio: 1; display: flex; align-items: center; justify-content: center; position: relative; }
+.batumi-map::before { content: ''; position: absolute; inset: 20px; border: 1px dashed rgba(196,98,45,0.18); }
+.map-city { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 0.3em; color: var(--terracotta); text-transform: uppercase; display: block; margin-bottom: 6px; text-align: center; }
+.map-country { font-size: 13px; color: var(--dust); font-style: italic; display: block; text-align: center; }
+.map-dot { width: 12px; height: 12px; background: var(--terracotta); border-radius: 50%; margin: 14px auto; box-shadow: 0 0 0 4px rgba(196,98,45,0.15), 0 0 0 8px rgba(196,98,45,0.07); }
+.batumi-features { display: flex; flex-direction: column; gap: 36px; margin-top: 44px; }
+.b-feature { display: flex; gap: 20px; align-items: flex-start; }
+.b-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+.b-title { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.2em; color: var(--ink); text-transform: uppercase; margin-bottom: 6px; }
+.b-text { font-size: 15px; line-height: 1.8; color: var(--dust); }
+
+.restaurant { background: var(--olive); padding: 100px 60px; }
+.restaurant .title { color: var(--parchment); }
+.restaurant .label { color: var(--ochre); }
+.restaurant-inner { display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center; }
+.rest-body { font-size: 18px; line-height: 1.9; color: rgba(242,232,213,0.65); max-width: 540px; }
+.rest-tag { display: inline-flex; align-items: center; gap: 10px; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.25em; color: var(--ochre); border: 1px solid rgba(212,168,83,0.3); padding: 10px 22px; margin-top: 40px; text-transform: uppercase; text-decoration: none; transition: border-color 0.3s, color 0.3s; }
+.rest-tag:hover { border-color: var(--ochre); color: var(--parchment); }
+.rest-visual { border: 1px solid rgba(212,168,83,0.2); padding: 44px; text-align: center; }
+.rest-name-geo { font-size: 52px; color: rgba(212,168,83,0.18); font-style: italic; display: block; margin-bottom: 16px; }
+.rest-desc { font-size: 14px; letter-spacing: 0.08em; color: rgba(212,168,83,0.5); font-style: italic; text-transform: uppercase; line-height: 1.7; }
+
+.visit { background: var(--parchment); }
+.visit-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.visit-info { display: flex; flex-direction: column; gap: 32px; margin-top: 44px; }
+.info-label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em; color: var(--terracotta); text-transform: uppercase; margin-bottom: 8px; display: block; }
+.info-text { font-size: 17px; line-height: 1.7; color: var(--dust); }
+.visit-form { display: flex; flex-direction: column; gap: 14px; }
+.visit-form input, .visit-form textarea { width: 100%; background: white; border: 1px solid rgba(196,98,45,0.2); font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--ink); padding: 14px 18px; outline: none; transition: border-color 0.3s; }
+.visit-form input::placeholder, .visit-form textarea::placeholder { color: var(--dust); opacity: 0.6; }
+.visit-form input:focus, .visit-form textarea:focus { border-color: var(--terracotta); }
+.visit-form textarea { height: 110px; resize: none; }
+.btn-send { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--parchment); background: var(--terracotta); border: none; padding: 16px; cursor: pointer; transition: background 0.3s; }
+.btn-send:hover { background: var(--clay); }
+
+footer { background: var(--dark-ink); padding: 60px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 40px; }
+.f-logo { text-align: center; }
+.f-logo-en { font-family: 'Cinzel', serif; font-size: 18px; letter-spacing: 0.35em; color: var(--ochre); display: block; }
+.f-logo-ge { font-size: 12px; color: var(--dust); font-style: italic; letter-spacing: 0.15em; }
+.f-left { font-size: 12px; letter-spacing: 0.08em; color: var(--dust); }
+.f-right { display: flex; gap: 24px; list-style: none; justify-content: flex-end; }
+.f-right a { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.2em; color: var(--dust); text-decoration: none; text-transform: uppercase; transition: color 0.3s; }
+.f-right a:hover { color: var(--ochre); }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.reveal.on { opacity: 1; transform: none; }
+.delay-1 { transition-delay: 0.12s; }
+.delay-2 { transition-delay: 0.24s; }
+.delay-3 { transition-delay: 0.36s; }
+
+@media (max-width: 900px) {
+  nav { padding: 20px 24px; }
+  .nav-links { display: none; }
+  section { padding: 72px 24px; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .story-grid, .batumi-inner, .restaurant-inner, .visit-inner { grid-template-columns: 1fr; }
+  .wines-grid { grid-template-columns: 1fr; }
+  footer { grid-template-columns: 1fr; text-align: center; }
+  .f-right { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">
+    <span class="nav-logo-en">NADIMI</span>
+    <span class="nav-logo-ge">ნადიმი</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#wines">Wines</a></li>
+    <li><a href="#batumi">Batumi</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-left">
+    <p class="hero-geo">ნადიმი · Batumi, Georgia</p>
+    <h1 class="hero-title">NADIMI</h1>
+    <p class="hero-meaning">
+      From the Georgian <strong>ნადიმი</strong> — meaning <em>symposium</em>: the ancient art of gathering together over wine, song, and conversation. Our wines carry that spirit in every bottle.
+    </p>
+    <a href="#wines" class="hero-cta">Discover Our Wines</a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-circle"></div>
+    <div class="hero-circle"></div>
+    <div class="hero-circle"></div>
+    <svg class="bottle-svg" viewBox="0 0 200 500" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <path d="M80 0 L80 60 Q40 100 30 180 L30 420 Q30 480 100 480 Q170 480 170 420 L170 180 Q160 100 120 60 L120 0 Z" fill="#2A1A08" stroke="#D4A853" stroke-width="1" opacity="0.9"/>
+      <rect x="42" y="220" width="116" height="140" rx="2" fill="#1C1610" stroke="#D4A853" stroke-width="0.8" opacity="0.9"/>
+      <rect x="48" y="226" width="104" height="128" rx="1" fill="none" stroke="rgba(212,168,83,0.3)" stroke-width="0.5"/>
+      <text x="100" y="268" text-anchor="middle" font-family="Cinzel, serif" font-size="13" fill="#D4A853" letter-spacing="3">NADIMI</text>
+      <text x="100" y="286" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="9" fill="rgba(212,168,83,0.5)" letter-spacing="2" font-style="italic">ნადიმი</text>
+      <line x1="60" y1="296" x2="140" y2="296" stroke="rgba(212,168,83,0.2)" stroke-width="0.5"/>
+      <circle cx="100" cy="320" r="16" fill="none" stroke="rgba(212,168,83,0.25)" stroke-width="0.5"/>
+      <circle cx="100" cy="320" r="4" fill="rgba(212,168,83,0.3)"/>
+      <text x="100" y="354" text-anchor="middle" font-family="Cinzel, serif" font-size="8" fill="rgba(212,168,83,0.4)" letter-spacing="2">BATUMI · GEORGIA</text>
+      <rect x="76" y="30" width="48" height="32" rx="1" fill="#1C1610" stroke="#D4A853" stroke-width="0.6" opacity="0.8"/>
+      <text x="100" y="51" text-anchor="middle" font-family="Cinzel, serif" font-size="7" fill="#D4A853" letter-spacing="1.5">2022</text>
+    </svg>
+  </div>
+</div>
+
+<section id="story" class="story">
+  <div class="container">
+    <div class="story-grid">
+      <div class="reveal">
+        <div class="story-frame">
+          <div style="text-align:center; padding: 40px;">
+            <span class="story-geo-text">ნადიმი</span>
+            <div class="city-badge">Batumi · Georgia</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="label reveal">Our Story</span>
+        <h2 class="title reveal delay-1">A wine born from the spirit of gathering</h2>
+        <p class="body-text reveal delay-2">NADIMI is the house wine of <em>Restaurant Symposium</em>, in the vibrant seaside city of Batumi, Georgia. The brand was created to embody the ancient ritual of the symposium — the Greek and Georgian tradition of coming together over food, wine, and meaningful conversation.</p>
+        <p class="body-text reveal delay-2" style="margin-top: 20px;">Designed with an illustrated identity that bridges ancient culture and contemporary craft, each label tells the story of a place, a moment, and a toast shared among friends.</p>
+        <div class="stats-row reveal delay-3">
+          <div class="stat"><span class="stat-n">8000</span><span class="stat-l">Years of Georgian wine</span></div>
+          <div class="stat"><span class="stat-n">3</span><span class="stat-l">Signature wines</span></div>
+          <div class="stat"><span class="stat-n">1</span><span class="stat-l">City by the sea</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="wines" class="wines">
+  <div class="container">
+    <div class="wines-header reveal">
+      <span class="label">The Collection</span>
+      <h2 class="title">Wines of Georgia</h2>
+      <p class="body-text">Three expressions of ancient Georgian grape varieties, crafted for the modern table.</p>
+    </div>
+    <div class="wines-grid">
+      <div class="wine-card reveal">
+        <div class="wine-card-top">
+          <span class="wine-color-dot" style="background:#C9995A;"></span>
+          <span class="wine-type-label">Amber · Qvevri</span>
+        </div>
+        <h3 class="wine-name">Rkatsiteli</h3>
+        <p class="wine-geo">რქაწითელი</p>
+        <p class="wine-desc">Our flagship amber wine, skin-contact fermented in traditional clay qvevri. Georgia's most celebrated white grape delivers a wine of stunning complexity and depth.</p>
+        <div class="tasting-row"><span class="taste-chip">Dried fig</span><span class="taste-chip">Beeswax</span><span class="taste-chip">Walnut</span><span class="taste-chip">Tannic</span></div>
+        <div class="wine-footer"><span class="wine-price">€36</span><span class="wine-year">2021</span></div>
+      </div>
+      <div class="wine-card reveal delay-1">
+        <div class="wine-card-top">
+          <span class="wine-color-dot" style="background:#6B1A2A;"></span>
+          <span class="wine-type-label">Red · Oak Aged</span>
+        </div>
+        <h3 class="wine-name">Saperavi</h3>
+        <p class="wine-geo">საფერავი</p>
+        <p class="wine-desc">Georgia's great red grape — ink-dark, full-bodied, with remarkable depth. Aged 18 months in Georgian oak, it is powerful yet deeply civilised, with a long velvety finish.</p>
+        <div class="tasting-row"><span class="taste-chip">Dark plum</span><span class="taste-chip">Blackberry</span><span class="taste-chip">Clove</span><span class="taste-chip">Tobacco</span></div>
+        <div class="wine-footer"><span class="wine-price">€42</span><span class="wine-year">2022</span></div>
+      </div>
+      <div class="wine-card reveal delay-2">
+        <div class="wine-card-top">
+          <span class="wine-color-dot" style="background:#F0D080;"></span>
+          <span class="wine-type-label">White · Stainless</span>
+        </div>
+        <h3 class="wine-name">Mtsvane</h3>
+        <p class="wine-geo">მწვანე</p>
+        <p class="wine-desc">Light and aromatic, Mtsvane ("the green one") is perfect with Batumi's fresh seafood. Pale gold, floral, with bright citrus acidity and a clean, mineral finish.</p>
+        <div class="tasting-row"><span class="taste-chip">White peach</span><span class="taste-chip">Jasmine</span><span class="taste-chip">Lime</span><span class="taste-chip">Mineral</span></div>
+        <div class="wine-footer"><span class="wine-price">€24</span><span class="wine-year">2023</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="meaning">
+  <span class="meaning-word">Symposium</span>
+  <blockquote class="meaning-quote reveal">The symposium was not merely a meal — it was a philosophy of living. To drink, to speak, to listen, and to remember.</blockquote>
+  <div class="meaning-border"></div>
+  <p class="meaning-sub">ნადიმი · The Georgian Art of Gathering</p>
+</div>
+
+<section id="batumi" class="batumi">
+  <div class="container">
+    <div class="batumi-inner">
+      <div>
+        <span class="label reveal">The Place</span>
+        <h2 class="title reveal delay-1">Born in Batumi, on the shore of the Black Sea</h2>
+        <p class="body-text reveal delay-2">Batumi is a city of contrasts — ancient and modern, European and Caucasian, mountainous and maritime. It is here, among the palms and the cobblestones, that NADIMI found its voice.</p>
+        <div class="batumi-features">
+          <div class="b-feature reveal"><div class="b-icon">🌊</div><div><p class="b-title">Black Sea Coast</p><p class="b-text">The humid, subtropical climate of Adjara shapes a unique terroir — wild, intense, and unlike anywhere else in Georgia.</p></div></div>
+          <div class="b-feature reveal delay-1"><div class="b-icon">🏛️</div><div><p class="b-title">Ancient Culture</p><p class="b-text">Georgia is home to one of the world's oldest wine cultures — 8,000 years of unbroken tradition, from qvevri clay jars to the modern glass.</p></div></div>
+          <div class="b-feature reveal delay-2"><div class="b-icon">🍇</div><div><p class="b-title">Native Varieties</p><p class="b-text">Over 500 indigenous grape varieties grow in Georgia. NADIMI celebrates the finest of them with honesty and craft.</p></div></div>
+        </div>
+      </div>
+      <div class="batumi-map reveal delay-2">
+        <div>
+          <div class="map-dot"></div>
+          <span class="map-city">Batumi</span>
+          <span class="map-country">Adjara, Georgia · საქართველო</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="restaurant">
+  <div class="container">
+    <div class="restaurant-inner">
+      <div>
+        <span class="label reveal">Our Home</span>
+        <h2 class="title reveal delay-1">Restaurant Symposium</h2>
+        <p class="rest-body reveal delay-2">NADIMI was created exclusively for Restaurant Symposium — a dining destination in Batumi where the philosophy of the ancient Greek and Georgian feast is very much alive. The restaurant's name and the wine's name share the same soul: the joy of the table, shared among friends.</p>
+        <a href="#visit" class="rest-tag reveal delay-2">Reserve a Table →</a>
+      </div>
+      <div class="rest-visual reveal delay-2">
+        <span class="rest-name-geo">სიმპოზიუმი</span>
+        <p class="rest-desc">Restaurant Symposium<br>Batumi, Georgia<br><br>"Where wine, food and<br>conversation become one"</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="visit" class="visit">
+  <div class="container">
+    <div class="visit-inner">
+      <div>
+        <span class="label reveal">Find Us</span>
+        <h2 class="title reveal delay-1">Come to the table</h2>
+        <p class="body-text reveal delay-2">Whether you're visiting Batumi or a longtime local, Restaurant Symposium welcomes you to experience NADIMI wines as they were meant — in good company.</p>
+        <div class="visit-info reveal delay-2">
+          <div><span class="info-label">Location</span><p class="info-text">Restaurant Symposium<br>Batumi, Adjara, Georgia</p></div>
+          <div><span class="info-label">Hours</span><p class="info-text">Monday – Sunday<br>12:00 – 23:00</p></div>
+          <div><span class="info-label">Reservations</span><p class="info-text">Recommended for evenings.<br>Walk-ins always welcome.</p></div>
+        </div>
+      </div>
+      <div class="reveal delay-2">
+        <div class="visit-form">
+          <input type="text" placeholder="Your Name">
+          <input type="email" placeholder="Email Address">
+          <input type="text" placeholder="Preferred Date & Time">
+          <textarea placeholder="Number of guests, dietary notes, or a message…"></textarea>
+          <button class="btn-send">Send Reservation Request</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="f-left">© 2025 Nadimi Wine · Restaurant Symposium<br>Batumi, Georgia</p>
+  <div class="f-logo"><span class="f-logo-en">NADIMI</span><span class="f-logo-ge">ნადიმი</span></div>
+  <ul class="f-right">
+    <li><a href="#story">Story</a></li>
+    <li><a href="#wines">Wines</a></li>
+    <li><a href="#batumi">Batumi</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
