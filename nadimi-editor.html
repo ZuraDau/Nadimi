@@ -9,17 +9,14 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Inter', sans-serif; background: #F5F5F3; color: #1a1a1a; height: 100vh; display: flex; flex-direction: column; }
 
-/* TOPBAR */
 .topbar { background: #1C1610; color: #F2E8D5; padding: 0 24px; height: 52px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
 .topbar-logo { font-size: 15px; letter-spacing: 0.2em; color: #D4A853; font-weight: 500; }
 .topbar-site { font-size: 12px; color: rgba(242,232,213,0.45); }
 .btn-download { background: #C4622D; color: white; border: none; padding: 8px 18px; font-size: 12px; font-family: 'Inter', sans-serif; font-weight: 500; cursor: pointer; border-radius: 6px; transition: background 0.2s; letter-spacing: 0.02em; }
 .btn-download:hover { background: #a84f24; }
 
-/* MAIN LAYOUT */
-.main { display: grid; grid-template-columns: 260px 1fr 340px; flex: 1; overflow: hidden; }
+.main { display: grid; grid-template-columns: 230px 1fr 320px; flex: 1; overflow: hidden; }
 
-/* SIDEBAR NAV */
 .sidebar { background: white; border-right: 1px solid #e5e5e5; overflow-y: auto; }
 .sidebar-title { font-size: 10px; letter-spacing: 0.1em; color: #999; text-transform: uppercase; padding: 16px 16px 8px; }
 .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 16px; cursor: pointer; font-size: 13px; color: #555; transition: all 0.15s; border-left: 3px solid transparent; }
@@ -27,29 +24,61 @@ body { font-family: 'Inter', sans-serif; background: #F5F5F3; color: #1a1a1a; he
 .nav-item.active { background: #fdf4ee; color: #C4622D; border-left-color: #C4622D; font-weight: 500; }
 .nav-icon { font-size: 14px; width: 18px; text-align: center; }
 
-/* EDITOR PANEL */
 .editor-panel { overflow-y: auto; padding: 24px; }
 .section-editor { display: none; }
 .section-editor.active { display: block; }
 .section-heading { font-size: 16px; font-weight: 600; color: #1a1a1a; margin-bottom: 4px; }
 .section-desc { font-size: 12px; color: #888; margin-bottom: 24px; }
 
-.field-group { margin-bottom: 20px; }
+.field-group { margin-bottom: 18px; }
 .field-label { font-size: 11px; font-weight: 500; color: #555; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; display: block; }
-.field-input, .field-textarea, .field-select {
-  width: 100%; background: white; border: 1px solid #e0e0e0;
-  padding: 9px 12px; font-size: 13px; font-family: 'Inter', sans-serif;
-  color: #1a1a1a; border-radius: 7px; outline: none;
-  transition: border-color 0.2s;
-}
+.field-input, .field-textarea { width: 100%; background: white; border: 1px solid #e0e0e0; padding: 9px 12px; font-size: 13px; font-family: 'Inter', sans-serif; color: #1a1a1a; border-radius: 7px; outline: none; transition: border-color 0.2s; }
 .field-input:focus, .field-textarea:focus { border-color: #C4622D; }
 .field-textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
 .card-editor { background: #faf8f5; border: 1px solid #ede8e0; border-radius: 10px; padding: 16px; margin-bottom: 16px; }
 .card-editor-title { font-size: 12px; font-weight: 600; color: #C4622D; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.05em; }
 
-.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+/* IMAGE UPLOAD ZONE */
+.img-upload-zone {
+  border: 2px dashed #e0d8d0;
+  border-radius: 10px;
+  background: white;
+  padding: 0;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+.img-upload-zone:hover { border-color: #C4622D; background: #fdf9f6; }
+.img-upload-zone.has-image { border-style: solid; border-color: #C4622D; }
+.img-upload-placeholder {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 28px 20px; gap: 8px; pointer-events: none;
+}
+.img-upload-icon { font-size: 28px; opacity: 0.4; }
+.img-upload-text { font-size: 13px; color: #888; text-align: center; }
+.img-upload-sub { font-size: 11px; color: #bbb; }
+.img-preview {
+  width: 100%; aspect-ratio: 16/7;
+  object-fit: cover; display: block;
+}
+.img-preview.portrait { aspect-ratio: 3/4; }
+.img-preview.square { aspect-ratio: 1; }
+.img-controls {
+  display: flex; gap: 8px; padding: 8px;
+  background: rgba(255,255,255,0.95);
+  border-top: 1px solid #f0ece6;
+}
+.img-btn { font-size: 11px; font-family: 'Inter', sans-serif; padding: 5px 12px; border-radius: 5px; cursor: pointer; border: 1px solid #e0e0e0; background: white; color: #555; transition: all 0.15s; }
+.img-btn:hover { border-color: #C4622D; color: #C4622D; }
+.img-btn.danger { color: #e54; border-color: #fcc; }
+.img-btn.danger:hover { background: #fff5f5; }
+.img-hidden-input { position: absolute; inset: 0; opacity: 0; cursor: pointer; font-size: 0; }
 
+/* Color swatches */
 .color-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
 .color-swatch { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; }
 .color-circle { width: 32px; height: 32px; border-radius: 50%; border: 2px solid transparent; transition: transform 0.15s; }
@@ -57,40 +86,34 @@ body { font-family: 'Inter', sans-serif; background: #F5F5F3; color: #1a1a1a; he
 .color-circle.selected { border-color: #1a1a1a; }
 .color-name { font-size: 10px; color: #888; }
 
-/* AI CHAT PANEL */
+/* AI PANEL */
 .ai-panel { background: white; border-left: 1px solid #e5e5e5; display: flex; flex-direction: column; }
-.ai-header { padding: 16px; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; gap: 10px; }
-.ai-badge { background: #1C1610; color: #D4A853; font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.05em; }
+.ai-header { padding: 14px 16px; border-bottom: 1px solid #f0f0f0; }
+.ai-badge { background: #1C1610; color: #D4A853; font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.05em; display: inline-block; margin-bottom: 4px; }
 .ai-title { font-size: 13px; font-weight: 500; }
 .ai-sub { font-size: 11px; color: #888; }
 .ai-messages { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
-.msg { max-width: 100%; }
-.msg-ai { }
+.msg-ai .msg-bubble { background: #f5f5f5; color: #1a1a1a; border-radius: 10px; border-bottom-left-radius: 3px; padding: 10px 14px; font-size: 13px; line-height: 1.6; }
 .msg-user { align-self: flex-end; }
-.msg-bubble { padding: 10px 14px; border-radius: 10px; font-size: 13px; line-height: 1.6; }
-.msg-ai .msg-bubble { background: #f5f5f5; color: #1a1a1a; border-bottom-left-radius: 3px; }
-.msg-user .msg-bubble { background: #C4622D; color: white; border-bottom-right-radius: 3px; }
+.msg-user .msg-bubble { background: #C4622D; color: white; border-radius: 10px; border-bottom-right-radius: 3px; padding: 10px 14px; font-size: 13px; line-height: 1.6; }
 .msg-sender { font-size: 10px; color: #aaa; margin-bottom: 4px; }
 .msg-user .msg-sender { text-align: right; }
-
-.ai-input-area { padding: 14px; border-top: 1px solid #f0f0f0; }
+.ai-input-area { padding: 12px 14px; border-top: 1px solid #f0f0f0; }
+.ai-hints { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.ai-hint { font-size: 11px; background: #faf8f5; border: 1px solid #ede8e0; border-radius: 20px; padding: 4px 10px; color: #888; cursor: pointer; transition: all 0.15s; }
+.ai-hint:hover { background: #fdf4ee; color: #C4622D; border-color: #C4622D; }
 .ai-input-row { display: flex; gap: 8px; }
-.ai-input { flex: 1; border: 1px solid #e0e0e0; border-radius: 8px; padding: 9px 12px; font-size: 13px; font-family: 'Inter', sans-serif; outline: none; resize: none; transition: border-color 0.2s; height: 40px; }
+.ai-input { flex: 1; border: 1px solid #e0e0e0; border-radius: 8px; padding: 9px 12px; font-size: 13px; font-family: 'Inter', sans-serif; outline: none; resize: none; height: 40px; transition: border-color 0.2s; }
 .ai-input:focus { border-color: #C4622D; }
 .btn-send { background: #C4622D; color: white; border: none; width: 38px; height: 38px; border-radius: 8px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: background 0.2s; flex-shrink: 0; }
 .btn-send:hover { background: #a84f24; }
 .btn-send:disabled { background: #ccc; cursor: not-allowed; }
-.ai-hints { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
-.ai-hint { font-size: 11px; background: #faf8f5; border: 1px solid #ede8e0; border-radius: 20px; padding: 4px 10px; color: #888; cursor: pointer; transition: all 0.15s; }
-.ai-hint:hover { background: #fdf4ee; color: #C4622D; border-color: #C4622D; }
-
-.typing { display: flex; gap: 4px; align-items: center; padding: 10px 14px; }
+.save-notice { font-size: 11px; color: #22c55e; margin-top: 6px; text-align: center; display: none; }
+.typing { display: flex; gap: 4px; align-items: center; padding: 10px 14px; background: #f5f5f5; border-radius: 10px; width: fit-content; }
 .dot { width: 6px; height: 6px; background: #ccc; border-radius: 50%; animation: bounce 1.2s infinite; }
 .dot:nth-child(2) { animation-delay: 0.2s; }
 .dot:nth-child(3) { animation-delay: 0.4s; }
-@keyframes bounce { 0%,80%,100% { transform: translateY(0); } 40% { transform: translateY(-6px); } }
-
-.save-notice { font-size: 11px; color: #22c55e; margin-top: 6px; text-align: center; display: none; }
+@keyframes bounce { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-6px)} }
 </style>
 </head>
 <body>
@@ -108,16 +131,18 @@ body { font-family: 'Inter', sans-serif; background: #F5F5F3; color: #1a1a1a; he
   <!-- SIDEBAR -->
   <div class="sidebar">
     <div class="sidebar-title">Sections</div>
-    <div class="nav-item active" onclick="showSection('hero', this)"><span class="nav-icon">🏠</span> Hero</div>
-    <div class="nav-item" onclick="showSection('story', this)"><span class="nav-icon">📖</span> Our Story</div>
-    <div class="nav-item" onclick="showSection('wines', this)"><span class="nav-icon">🍷</span> Wines</div>
-    <div class="nav-item" onclick="showSection('quote', this)"><span class="nav-icon">💬</span> Quote</div>
-    <div class="nav-item" onclick="showSection('batumi', this)"><span class="nav-icon">🌊</span> Batumi</div>
-    <div class="nav-item" onclick="showSection('restaurant', this)"><span class="nav-icon">🏛️</span> Restaurant</div>
-    <div class="nav-item" onclick="showSection('visit', this)"><span class="nav-icon">📍</span> Visit & Contact</div>
-    <div class="nav-item" onclick="showSection('footer', this)"><span class="nav-icon">⚙️</span> Footer</div>
+    <div class="nav-item active" onclick="showSection('hero',this)"><span class="nav-icon">🏠</span> Hero</div>
+    <div class="nav-item" onclick="showSection('story',this)"><span class="nav-icon">📖</span> Our Story</div>
+    <div class="nav-item" onclick="showSection('wines',this)"><span class="nav-icon">🍷</span> Wines</div>
+    <div class="nav-item" onclick="showSection('quote',this)"><span class="nav-icon">💬</span> Quote</div>
+    <div class="nav-item" onclick="showSection('batumi',this)"><span class="nav-icon">🌊</span> Batumi</div>
+    <div class="nav-item" onclick="showSection('restaurant',this)"><span class="nav-icon">🏛️</span> Restaurant</div>
+    <div class="nav-item" onclick="showSection('visit',this)"><span class="nav-icon">📍</span> Visit & Contact</div>
+    <div class="nav-item" onclick="showSection('footer',this)"><span class="nav-icon">⚙️</span> Footer</div>
     <div class="sidebar-title" style="margin-top:8px;">Style</div>
-    <div class="nav-item" onclick="showSection('colors', this)"><span class="nav-icon">🎨</span> Colors</div>
+    <div class="nav-item" onclick="showSection('colors',this)"><span class="nav-icon">🎨</span> Colors & Theme</div>
+    <div class="sidebar-title" style="margin-top:8px;">Photos</div>
+    <div class="nav-item" onclick="showSection('photos',this)"><span class="nav-icon">🖼️</span> All Photos</div>
   </div>
 
   <!-- EDITOR PANEL -->
@@ -126,10 +151,21 @@ body { font-family: 'Inter', sans-serif; background: #F5F5F3; color: #1a1a1a; he
     <!-- HERO -->
     <div class="section-editor active" id="sec-hero">
       <div class="section-heading">Hero Section</div>
-      <div class="section-desc">The first thing visitors see — make it count.</div>
+      <div class="section-desc">The first thing visitors see.</div>
+
+      <div class="field-label">Hero Background Photo</div>
+      <div class="img-upload-zone" id="zone-hero-bg" onclick="triggerUpload('upload-hero-bg')">
+        <input type="file" accept="image/*" id="upload-hero-bg" class="img-hidden-input" onchange="handleImage(event,'hero-bg','zone-hero-bg','preview-hero-bg','landscape')">
+        <div class="img-upload-placeholder" id="ph-hero-bg">
+          <div class="img-upload-icon">🌅</div>
+          <div class="img-upload-text">Click to upload hero background</div>
+          <div class="img-upload-sub">JPG, PNG, WEBP — recommended 1800×900px</div>
+        </div>
+      </div>
+
       <div class="field-group"><label class="field-label">Main Title</label><input class="field-input" id="hero-title" value="NADIMI" oninput="update()"></div>
-      <div class="field-group"><label class="field-label">Georgian Script</label><input class="field-input" id="hero-geo" value="ნადიმი · Batumi, Georgia" oninput="update()"></div>
-      <div class="field-group"><label class="field-label">Description / Meaning</label><textarea class="field-textarea" id="hero-meaning" oninput="update()">From the Georgian ნადიმი — meaning symposium: the ancient art of gathering together over wine, song, and conversation. Our wines carry that spirit in every bottle.</textarea></div>
+      <div class="field-group"><label class="field-label">Georgian / Location Line</label><input class="field-input" id="hero-geo" value="ნადიმი · Batumi, Georgia" oninput="update()"></div>
+      <div class="field-group"><label class="field-label">Description</label><textarea class="field-textarea" id="hero-meaning" oninput="update()">From the Georgian ნადიმი — meaning symposium: the ancient art of gathering together over wine, song, and conversation. Our wines carry that spirit in every bottle.</textarea></div>
       <div class="field-group"><label class="field-label">Button Text</label><input class="field-input" id="hero-cta" value="Discover Our Wines" oninput="update()"></div>
     </div>
 
@@ -137,20 +173,31 @@ body { font-family: 'Inter', sans-serif; background: #F5F5F3; color: #1a1a1a; he
     <div class="section-editor" id="sec-story">
       <div class="section-heading">Our Story</div>
       <div class="section-desc">Your heritage and background.</div>
+
+      <div class="field-label">Story Photo</div>
+      <div class="img-upload-zone" id="zone-story-img" onclick="triggerUpload('upload-story-img')">
+        <input type="file" accept="image/*" id="upload-story-img" class="img-hidden-input" onchange="handleImage(event,'story-img','zone-story-img','preview-story-img','portrait')">
+        <div class="img-upload-placeholder" id="ph-story-img">
+          <div class="img-upload-icon">📸</div>
+          <div class="img-upload-text">Click to upload story photo</div>
+          <div class="img-upload-sub">Portrait orientation works best (3:4)</div>
+        </div>
+      </div>
+
       <div class="field-group"><label class="field-label">Section Label</label><input class="field-input" id="story-label" value="Our Story" oninput="update()"></div>
       <div class="field-group"><label class="field-label">Title</label><input class="field-input" id="story-title" value="A wine born from the spirit of gathering" oninput="update()"></div>
       <div class="field-group"><label class="field-label">Paragraph 1</label><textarea class="field-textarea" id="story-p1" oninput="update()">NADIMI is the house wine of Restaurant Symposium, in the vibrant seaside city of Batumi, Georgia. The brand was created to embody the ancient ritual of the symposium — the Greek and Georgian tradition of coming together over food, wine, and meaningful conversation.</textarea></div>
       <div class="field-group"><label class="field-label">Paragraph 2</label><textarea class="field-textarea" id="story-p2" oninput="update()">Designed with an illustrated identity that bridges ancient culture and contemporary craft, each label tells the story of a place, a moment, and a toast shared among friends.</textarea></div>
       <div class="field-row">
-        <div class="field-group"><label class="field-label">Stat 1 Number</label><input class="field-input" id="stat1-n" value="8000" oninput="update()"></div>
+        <div class="field-group"><label class="field-label">Stat 1 #</label><input class="field-input" id="stat1-n" value="8000" oninput="update()"></div>
         <div class="field-group"><label class="field-label">Stat 1 Label</label><input class="field-input" id="stat1-l" value="Years of Georgian wine" oninput="update()"></div>
       </div>
       <div class="field-row">
-        <div class="field-group"><label class="field-label">Stat 2 Number</label><input class="field-input" id="stat2-n" value="3" oninput="update()"></div>
+        <div class="field-group"><label class="field-label">Stat 2 #</label><input class="field-input" id="stat2-n" value="3" oninput="update()"></div>
         <div class="field-group"><label class="field-label">Stat 2 Label</label><input class="field-input" id="stat2-l" value="Signature wines" oninput="update()"></div>
       </div>
       <div class="field-row">
-        <div class="field-group"><label class="field-label">Stat 3 Number</label><input class="field-input" id="stat3-n" value="1" oninput="update()"></div>
+        <div class="field-group"><label class="field-label">Stat 3 #</label><input class="field-input" id="stat3-n" value="1" oninput="update()"></div>
         <div class="field-group"><label class="field-label">Stat 3 Label</label><input class="field-input" id="stat3-l" value="City by the sea" oninput="update()"></div>
       </div>
     </div>
@@ -162,45 +209,72 @@ body { font-family: 'Inter', sans-serif; background: #F5F5F3; color: #1a1a1a; he
 
       <div class="card-editor">
         <div class="card-editor-title">Wine 1 — Amber</div>
+        <div class="field-label">Wine Photo</div>
+        <div class="img-upload-zone" id="zone-w1-img" onclick="triggerUpload('upload-w1-img')">
+          <input type="file" accept="image/*" id="upload-w1-img" class="img-hidden-input" onchange="handleImage(event,'w1-img','zone-w1-img','preview-w1-img','square')">
+          <div class="img-upload-placeholder" id="ph-w1-img">
+            <div class="img-upload-icon">🍾</div>
+            <div class="img-upload-text">Upload wine bottle or label photo</div>
+            <div class="img-upload-sub">Square crop recommended</div>
+          </div>
+        </div>
         <div class="field-group"><label class="field-label">Wine Name</label><input class="field-input" id="w1-name" value="Rkatsiteli" oninput="update()"></div>
         <div class="field-row">
           <div class="field-group"><label class="field-label">Georgian Name</label><input class="field-input" id="w1-geo" value="რქაწითელი" oninput="update()"></div>
-          <div class="field-group"><label class="field-label">Type</label><input class="field-input" id="w1-type" value="Amber · Qvevri" oninput="update()"></div>
+          <div class="field-group"><label class="field-label">Type / Style</label><input class="field-input" id="w1-type" value="Amber · Qvevri" oninput="update()"></div>
         </div>
         <div class="field-group"><label class="field-label">Description</label><textarea class="field-textarea" id="w1-desc" oninput="update()">Our flagship amber wine, skin-contact fermented in traditional clay qvevri. Georgia's most celebrated white grape delivers a wine of stunning complexity and depth.</textarea></div>
         <div class="field-row">
           <div class="field-group"><label class="field-label">Price</label><input class="field-input" id="w1-price" value="€36" oninput="update()"></div>
-          <div class="field-group"><label class="field-label">Vintage Year</label><input class="field-input" id="w1-year" value="2021" oninput="update()"></div>
+          <div class="field-group"><label class="field-label">Vintage</label><input class="field-input" id="w1-year" value="2021" oninput="update()"></div>
         </div>
         <div class="field-group"><label class="field-label">Tasting Notes (comma separated)</label><input class="field-input" id="w1-notes" value="Dried fig, Beeswax, Walnut, Tannic" oninput="update()"></div>
       </div>
 
       <div class="card-editor">
         <div class="card-editor-title">Wine 2 — Red</div>
+        <div class="field-label">Wine Photo</div>
+        <div class="img-upload-zone" id="zone-w2-img" onclick="triggerUpload('upload-w2-img')">
+          <input type="file" accept="image/*" id="upload-w2-img" class="img-hidden-input" onchange="handleImage(event,'w2-img','zone-w2-img','preview-w2-img','square')">
+          <div class="img-upload-placeholder" id="ph-w2-img">
+            <div class="img-upload-icon">🍾</div>
+            <div class="img-upload-text">Upload wine bottle or label photo</div>
+            <div class="img-upload-sub">Square crop recommended</div>
+          </div>
+        </div>
         <div class="field-group"><label class="field-label">Wine Name</label><input class="field-input" id="w2-name" value="Saperavi" oninput="update()"></div>
         <div class="field-row">
           <div class="field-group"><label class="field-label">Georgian Name</label><input class="field-input" id="w2-geo" value="საფერავი" oninput="update()"></div>
-          <div class="field-group"><label class="field-label">Type</label><input class="field-input" id="w2-type" value="Red · Oak Aged" oninput="update()"></div>
+          <div class="field-group"><label class="field-label">Type / Style</label><input class="field-input" id="w2-type" value="Red · Oak Aged" oninput="update()"></div>
         </div>
         <div class="field-group"><label class="field-label">Description</label><textarea class="field-textarea" id="w2-desc" oninput="update()">Georgia's great red grape — ink-dark, full-bodied, with remarkable depth. Aged 18 months in Georgian oak, it is powerful yet deeply civilised, with a long velvety finish.</textarea></div>
         <div class="field-row">
           <div class="field-group"><label class="field-label">Price</label><input class="field-input" id="w2-price" value="€42" oninput="update()"></div>
-          <div class="field-group"><label class="field-label">Vintage Year</label><input class="field-input" id="w2-year" value="2022" oninput="update()"></div>
+          <div class="field-group"><label class="field-label">Vintage</label><input class="field-input" id="w2-year" value="2022" oninput="update()"></div>
         </div>
         <div class="field-group"><label class="field-label">Tasting Notes (comma separated)</label><input class="field-input" id="w2-notes" value="Dark plum, Blackberry, Clove, Tobacco" oninput="update()"></div>
       </div>
 
       <div class="card-editor">
         <div class="card-editor-title">Wine 3 — White</div>
+        <div class="field-label">Wine Photo</div>
+        <div class="img-upload-zone" id="zone-w3-img" onclick="triggerUpload('upload-w3-img')">
+          <input type="file" accept="image/*" id="upload-w3-img" class="img-hidden-input" onchange="handleImage(event,'w3-img','zone-w3-img','preview-w3-img','square')">
+          <div class="img-upload-placeholder" id="ph-w3-img">
+            <div class="img-upload-icon">🍾</div>
+            <div class="img-upload-text">Upload wine bottle or label photo</div>
+            <div class="img-upload-sub">Square crop recommended</div>
+          </div>
+        </div>
         <div class="field-group"><label class="field-label">Wine Name</label><input class="field-input" id="w3-name" value="Mtsvane" oninput="update()"></div>
         <div class="field-row">
           <div class="field-group"><label class="field-label">Georgian Name</label><input class="field-input" id="w3-geo" value="მწვანე" oninput="update()"></div>
-          <div class="field-group"><label class="field-label">Type</label><input class="field-input" id="w3-type" value="White · Stainless" oninput="update()"></div>
+          <div class="field-group"><label class="field-label">Type / Style</label><input class="field-input" id="w3-type" value="White · Stainless" oninput="update()"></div>
         </div>
         <div class="field-group"><label class="field-label">Description</label><textarea class="field-textarea" id="w3-desc" oninput="update()">Light and aromatic, Mtsvane ("the green one") is perfect with Batumi's fresh seafood. Pale gold, floral, with bright citrus acidity and a clean, mineral finish.</textarea></div>
         <div class="field-row">
           <div class="field-group"><label class="field-label">Price</label><input class="field-input" id="w3-price" value="€24" oninput="update()"></div>
-          <div class="field-group"><label class="field-label">Vintage Year</label><input class="field-input" id="w3-year" value="2023" oninput="update()"></div>
+          <div class="field-group"><label class="field-label">Vintage</label><input class="field-input" id="w3-year" value="2023" oninput="update()"></div>
         </div>
         <div class="field-group"><label class="field-label">Tasting Notes (comma separated)</label><input class="field-input" id="w3-notes" value="White peach, Jasmine, Lime, Mineral" oninput="update()"></div>
       </div>
@@ -208,8 +282,7 @@ body { font-family: 'Inter', sans-serif; background: #F5F5F3; color: #1a1a1a; he
 
     <!-- QUOTE -->
     <div class="section-editor" id="sec-quote">
-      <div class="section-heading">Meaning / Quote</div>
-      <div class="section-desc">The philosophical banner shown between sections.</div>
+      <div class="section-heading">Quote Banner</div>
       <div class="field-group"><label class="field-label">Large Background Word</label><input class="field-input" id="q-word" value="Symposium" oninput="update()"></div>
       <div class="field-group"><label class="field-label">Quote Text</label><textarea class="field-textarea" id="q-text" oninput="update()">The symposium was not merely a meal — it was a philosophy of living. To drink, to speak, to listen, and to remember.</textarea></div>
       <div class="field-group"><label class="field-label">Sub-caption</label><input class="field-input" id="q-sub" value="ნადიმი · The Georgian Art of Gathering" oninput="update()"></div>
@@ -218,14 +291,24 @@ body { font-family: 'Inter', sans-serif; background: #F5F5F3; color: #1a1a1a; he
     <!-- BATUMI -->
     <div class="section-editor" id="sec-batumi">
       <div class="section-heading">Batumi Section</div>
-      <div class="section-desc">Information about the city and origins.</div>
+
+      <div class="field-label">Batumi / Vineyard Photo</div>
+      <div class="img-upload-zone" id="zone-bat-img" onclick="triggerUpload('upload-bat-img')">
+        <input type="file" accept="image/*" id="upload-bat-img" class="img-hidden-input" onchange="handleImage(event,'bat-img','zone-bat-img','preview-bat-img','landscape')">
+        <div class="img-upload-placeholder" id="ph-bat-img">
+          <div class="img-upload-icon">🌊</div>
+          <div class="img-upload-text">Upload Batumi or vineyard photo</div>
+          <div class="img-upload-sub">Landscape orientation recommended</div>
+        </div>
+      </div>
+
       <div class="field-group"><label class="field-label">Title</label><input class="field-input" id="bat-title" value="Born in Batumi, on the shore of the Black Sea" oninput="update()"></div>
       <div class="field-group"><label class="field-label">Body Text</label><textarea class="field-textarea" id="bat-body" oninput="update()">Batumi is a city of contrasts — ancient and modern, European and Caucasian, mountainous and maritime. It is here, among the palms and the cobblestones, that NADIMI found its voice.</textarea></div>
       <div class="card-editor">
         <div class="card-editor-title">Feature 1</div>
         <div class="field-row">
           <div class="field-group"><label class="field-label">Title</label><input class="field-input" id="bf1-t" value="Black Sea Coast" oninput="update()"></div>
-          <div class="field-group"><label class="field-label">Icon (emoji)</label><input class="field-input" id="bf1-i" value="🌊" oninput="update()"></div>
+          <div class="field-group"><label class="field-label">Icon</label><input class="field-input" id="bf1-i" value="🌊" oninput="update()"></div>
         </div>
         <div class="field-group"><label class="field-label">Text</label><textarea class="field-textarea" id="bf1-d" style="min-height:60px" oninput="update()">The humid, subtropical climate of Adjara shapes a unique terroir — wild, intense, and unlike anywhere else in Georgia.</textarea></div>
       </div>
@@ -233,7 +316,7 @@ body { font-family: 'Inter', sans-serif; background: #F5F5F3; color: #1a1a1a; he
         <div class="card-editor-title">Feature 2</div>
         <div class="field-row">
           <div class="field-group"><label class="field-label">Title</label><input class="field-input" id="bf2-t" value="Ancient Culture" oninput="update()"></div>
-          <div class="field-group"><label class="field-label">Icon (emoji)</label><input class="field-input" id="bf2-i" value="🏛️" oninput="update()"></div>
+          <div class="field-group"><label class="field-label">Icon</label><input class="field-input" id="bf2-i" value="🏛️" oninput="update()"></div>
         </div>
         <div class="field-group"><label class="field-label">Text</label><textarea class="field-textarea" id="bf2-d" style="min-height:60px" oninput="update()">Georgia is home to one of the world's oldest wine cultures — 8,000 years of unbroken tradition, from qvevri clay jars to the modern glass.</textarea></div>
       </div>
@@ -241,7 +324,7 @@ body { font-family: 'Inter', sans-serif; background: #F5F5F3; color: #1a1a1a; he
         <div class="card-editor-title">Feature 3</div>
         <div class="field-row">
           <div class="field-group"><label class="field-label">Title</label><input class="field-input" id="bf3-t" value="Native Varieties" oninput="update()"></div>
-          <div class="field-group"><label class="field-label">Icon (emoji)</label><input class="field-input" id="bf3-i" value="🍇" oninput="update()"></div>
+          <div class="field-group"><label class="field-label">Icon</label><input class="field-input" id="bf3-i" value="🍇" oninput="update()"></div>
         </div>
         <div class="field-group"><label class="field-label">Text</label><textarea class="field-textarea" id="bf3-d" style="min-height:60px" oninput="update()">Over 500 indigenous grape varieties grow in Georgia. NADIMI celebrates the finest of them with honesty and craft.</textarea></div>
       </div>
@@ -250,7 +333,17 @@ body { font-family: 'Inter', sans-serif; background: #F5F5F3; color: #1a1a1a; he
     <!-- RESTAURANT -->
     <div class="section-editor" id="sec-restaurant">
       <div class="section-heading">Restaurant Section</div>
-      <div class="section-desc">About Restaurant Symposium.</div>
+
+      <div class="field-label">Restaurant Photo</div>
+      <div class="img-upload-zone" id="zone-rest-img" onclick="triggerUpload('upload-rest-img')">
+        <input type="file" accept="image/*" id="upload-rest-img" class="img-hidden-input" onchange="handleImage(event,'rest-img','zone-rest-img','preview-rest-img','landscape')">
+        <div class="img-upload-placeholder" id="ph-rest-img">
+          <div class="img-upload-icon">🏛️</div>
+          <div class="img-upload-text">Upload restaurant interior or exterior photo</div>
+          <div class="img-upload-sub">Landscape orientation recommended</div>
+        </div>
+      </div>
+
       <div class="field-group"><label class="field-label">Title</label><input class="field-input" id="rest-title" value="Restaurant Symposium" oninput="update()"></div>
       <div class="field-group"><label class="field-label">Body Text</label><textarea class="field-textarea" id="rest-body" oninput="update()">NADIMI was created exclusively for Restaurant Symposium — a dining destination in Batumi where the philosophy of the ancient Greek and Georgian feast is very much alive. The restaurant's name and the wine's name share the same soul: the joy of the table, shared among friends.</textarea></div>
       <div class="field-group"><label class="field-label">Button Text</label><input class="field-input" id="rest-btn" value="Reserve a Table →" oninput="update()"></div>
@@ -259,8 +352,7 @@ body { font-family: 'Inter', sans-serif; background: #F5F5F3; color: #1a1a1a; he
     <!-- VISIT -->
     <div class="section-editor" id="sec-visit">
       <div class="section-heading">Visit & Contact</div>
-      <div class="section-desc">Contact details and opening hours.</div>
-      <div class="field-group"><label class="field-label">Section Title</label><input class="field-input" id="vis-title" value="Come to the table" oninput="update()"></div>
+      <div class="field-group"><label class="field-label">Title</label><input class="field-input" id="vis-title" value="Come to the table" oninput="update()"></div>
       <div class="field-group"><label class="field-label">Intro Text</label><textarea class="field-textarea" id="vis-body" oninput="update()">Whether you're visiting Batumi or a longtime local, Restaurant Symposium welcomes you to experience NADIMI wines as they were meant — in good company.</textarea></div>
       <div class="field-group"><label class="field-label">Address</label><textarea class="field-textarea" id="vis-addr" style="min-height:60px" oninput="update()">Restaurant Symposium
 Batumi, Adjara, Georgia</textarea></div>
@@ -273,7 +365,7 @@ Batumi, Adjara, Georgia</textarea></div>
     <div class="section-editor" id="sec-footer">
       <div class="section-heading">Footer</div>
       <div class="field-group"><label class="field-label">Copyright Text</label><input class="field-input" id="foot-copy" value="© 2025 Nadimi Wine · Restaurant Symposium" oninput="update()"></div>
-      <div class="field-group"><label class="field-label">City / Country Line</label><input class="field-input" id="foot-city" value="Batumi, Georgia" oninput="update()"></div>
+      <div class="field-group"><label class="field-label">City / Country</label><input class="field-input" id="foot-city" value="Batumi, Georgia" oninput="update()"></div>
     </div>
 
     <!-- COLORS -->
@@ -281,73 +373,196 @@ Batumi, Adjara, Georgia</textarea></div>
       <div class="section-heading">Color Theme</div>
       <div class="section-desc">Choose the main accent color of your site.</div>
       <div class="color-row">
-        <div class="color-swatch" onclick="setTheme('#C4622D','#D4A853','#1C1610')">
-          <div class="color-circle selected" style="background:#C4622D;" id="sw1"></div>
-          <span class="color-name">Terracotta</span>
-        </div>
-        <div class="color-swatch" onclick="setTheme('#5C1A1A','#C9A84C','#1C1610')">
-          <div class="color-circle" style="background:#5C1A1A;" id="sw2"></div>
-          <span class="color-name">Burgundy</span>
-        </div>
-        <div class="color-swatch" onclick="setTheme('#4A5240','#8A9E70','#1C1610')">
-          <div class="color-circle" style="background:#4A5240;" id="sw3"></div>
-          <span class="color-name">Olive</span>
-        </div>
-        <div class="color-swatch" onclick="setTheme('#1B3A5C','#7AADCC','#0E1F30')">
-          <div class="color-circle" style="background:#1B3A5C;" id="sw4"></div>
-          <span class="color-name">Midnight</span>
-        </div>
-        <div class="color-swatch" onclick="setTheme('#6B4C2A','#C9A87A','#1a0e08')">
-          <div class="color-circle" style="background:#6B4C2A;" id="sw5"></div>
-          <span class="color-name">Oak</span>
-        </div>
+        <div class="color-swatch" onclick="setTheme('#C4622D','#D4A853','#1C1610',this)"><div class="color-circle selected" style="background:#C4622D;"></div><span class="color-name">Terracotta</span></div>
+        <div class="color-swatch" onclick="setTheme('#5C1A1A','#C9A84C','#1C1610',this)"><div class="color-circle" style="background:#5C1A1A;"></div><span class="color-name">Burgundy</span></div>
+        <div class="color-swatch" onclick="setTheme('#4A5240','#8A9E70','#1C1610',this)"><div class="color-circle" style="background:#4A5240;"></div><span class="color-name">Olive</span></div>
+        <div class="color-swatch" onclick="setTheme('#1B3A5C','#7AADCC','#0E1F30',this)"><div class="color-circle" style="background:#1B3A5C;"></div><span class="color-name">Midnight</span></div>
+        <div class="color-swatch" onclick="setTheme('#6B4C2A','#C9A87A','#1a0e08',this)"><div class="color-circle" style="background:#6B4C2A;"></div><span class="color-name">Oak</span></div>
       </div>
-      <p style="font-size:12px;color:#888;">More color options coming — use the AI assistant to describe a color style.</p>
     </div>
 
-  </div>
+    <!-- PHOTOS OVERVIEW -->
+    <div class="section-editor" id="sec-photos">
+      <div class="section-heading">All Photos</div>
+      <div class="section-desc">Upload photos for each section of your site. Images are embedded directly into the HTML — no separate files needed.</div>
+
+      <div class="card-editor">
+        <div class="card-editor-title">Hero Background</div>
+        <div class="img-upload-zone" id="zone-hero-bg2" onclick="triggerUpload('upload-hero-bg2')">
+          <input type="file" accept="image/*" id="upload-hero-bg2" class="img-hidden-input" onchange="handleImage(event,'hero-bg','zone-hero-bg2','preview-hero-bg2','landscape'); syncZone('hero-bg','zone-hero-bg','preview-hero-bg')">
+          <div class="img-upload-placeholder" id="ph-hero-bg2"><div class="img-upload-icon">🌅</div><div class="img-upload-text">Hero background (1800×900px)</div></div>
+        </div>
+      </div>
+
+      <div class="card-editor">
+        <div class="card-editor-title">Story Photo</div>
+        <div class="img-upload-zone" id="zone-story-img2" onclick="triggerUpload('upload-story-img2')">
+          <input type="file" accept="image/*" id="upload-story-img2" class="img-hidden-input" onchange="handleImage(event,'story-img','zone-story-img2','preview-story-img2','portrait'); syncZone('story-img','zone-story-img','preview-story-img')">
+          <div class="img-upload-placeholder" id="ph-story-img2"><div class="img-upload-icon">📸</div><div class="img-upload-text">Story section photo (portrait)</div></div>
+        </div>
+      </div>
+
+      <div class="card-editor">
+        <div class="card-editor-title">Wine Photos</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+          <div>
+            <div style="font-size:11px;color:#888;margin-bottom:6px;">Wine 1</div>
+            <div class="img-upload-zone" id="zone-w1-img2" onclick="triggerUpload('upload-w1-img2')">
+              <input type="file" accept="image/*" id="upload-w1-img2" class="img-hidden-input" onchange="handleImage(event,'w1-img','zone-w1-img2','preview-w1-img2','square'); syncZone('w1-img','zone-w1-img','preview-w1-img')">
+              <div class="img-upload-placeholder" id="ph-w1-img2" style="padding:16px 8px;"><div class="img-upload-icon" style="font-size:20px;">🍾</div><div class="img-upload-text" style="font-size:11px;">Rkatsiteli</div></div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:11px;color:#888;margin-bottom:6px;">Wine 2</div>
+            <div class="img-upload-zone" id="zone-w2-img2" onclick="triggerUpload('upload-w2-img2')">
+              <input type="file" accept="image/*" id="upload-w2-img2" class="img-hidden-input" onchange="handleImage(event,'w2-img','zone-w2-img2','preview-w2-img2','square'); syncZone('w2-img','zone-w2-img','preview-w2-img')">
+              <div class="img-upload-placeholder" id="ph-w2-img2" style="padding:16px 8px;"><div class="img-upload-icon" style="font-size:20px;">🍾</div><div class="img-upload-text" style="font-size:11px;">Saperavi</div></div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:11px;color:#888;margin-bottom:6px;">Wine 3</div>
+            <div class="img-upload-zone" id="zone-w3-img2" onclick="triggerUpload('upload-w3-img2')">
+              <input type="file" accept="image/*" id="upload-w3-img2" class="img-hidden-input" onchange="handleImage(event,'w3-img','zone-w3-img2','preview-w3-img2','square'); syncZone('w3-img','zone-w3-img','preview-w3-img')">
+              <div class="img-upload-placeholder" id="ph-w3-img2" style="padding:16px 8px;"><div class="img-upload-icon" style="font-size:20px;">🍾</div><div class="img-upload-text" style="font-size:11px;">Mtsvane</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-editor">
+        <div class="card-editor-title">Batumi / Vineyard Photo</div>
+        <div class="img-upload-zone" id="zone-bat-img2" onclick="triggerUpload('upload-bat-img2')">
+          <input type="file" accept="image/*" id="upload-bat-img2" class="img-hidden-input" onchange="handleImage(event,'bat-img','zone-bat-img2','preview-bat-img2','landscape'); syncZone('bat-img','zone-bat-img','preview-bat-img')">
+          <div class="img-upload-placeholder" id="ph-bat-img2"><div class="img-upload-icon">🌊</div><div class="img-upload-text">Batumi or vineyard landscape</div></div>
+        </div>
+      </div>
+
+      <div class="card-editor">
+        <div class="card-editor-title">Restaurant Photo</div>
+        <div class="img-upload-zone" id="zone-rest-img2" onclick="triggerUpload('upload-rest-img2')">
+          <input type="file" accept="image/*" id="upload-rest-img2" class="img-hidden-input" onchange="handleImage(event,'rest-img','zone-rest-img2','preview-rest-img2','landscape'); syncZone('rest-img','zone-rest-img','preview-rest-img')">
+          <div class="img-upload-placeholder" id="ph-rest-img2"><div class="img-upload-icon">🏛️</div><div class="img-upload-text">Restaurant interior or exterior</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /editor-panel -->
 
   <!-- AI PANEL -->
   <div class="ai-panel">
     <div class="ai-header">
-      <div>
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px;">
-          <span class="ai-badge">AI</span>
-          <span class="ai-title">AI Assistant</span>
-        </div>
-        <div class="ai-sub">Describe changes in plain language</div>
-      </div>
+      <span class="ai-badge">AI</span>
+      <div class="ai-title">AI Assistant</div>
+      <div class="ai-sub">Describe changes in plain language</div>
     </div>
     <div class="ai-messages" id="ai-messages">
       <div class="msg msg-ai">
         <div class="msg-sender">Assistant</div>
-        <div class="msg-bubble">Hello! I can help you update your Nadimi website. Just tell me what you'd like to change — for example:<br><br>
-        • "Change the Saperavi price to €48"<br>
-        • "Make the hero description shorter"<br>
-        • "Change opening hours to 13:00 – 22:00"<br>
+        <div class="msg-bubble">Hello! I can update your Nadimi site in plain language. Try:<br><br>
+        • "Change Saperavi price to €50"<br>
+        • "Update hours to 13:00–23:00"<br>
+        • "Make the hero text shorter"<br>
         • "Add a fourth wine called Chinuri"</div>
       </div>
     </div>
     <div class="ai-input-area">
       <div class="ai-hints">
-        <span class="ai-hint" onclick="quickAsk('Change the Saperavi price to €48')">Change wine price</span>
-        <span class="ai-hint" onclick="quickAsk('Make the hero description shorter and more poetic')">Shorten hero text</span>
-        <span class="ai-hint" onclick="quickAsk('Change opening hours to 13:00 – 23:00')">Update hours</span>
-        <span class="ai-hint" onclick="quickAsk('Make the story section sound more luxurious')">Luxury tone</span>
+        <span class="ai-hint" onclick="quickAsk('Change the Saperavi price to €50')">Change wine price</span>
+        <span class="ai-hint" onclick="quickAsk('Make the hero description shorter and more poetic')">Edit hero text</span>
+        <span class="ai-hint" onclick="quickAsk('Update opening hours to 13:00 – 23:00')">Update hours</span>
+        <span class="ai-hint" onclick="quickAsk('Make the story section sound more luxurious and refined')">Luxury tone</span>
       </div>
       <div class="ai-input-row">
-        <textarea class="ai-input" id="ai-input" placeholder="Type a change..." rows="1"
-          onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendAI();}"></textarea>
+        <textarea class="ai-input" id="ai-input" placeholder="Type a change..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendAI();}"></textarea>
         <button class="btn-send" id="btn-send" onclick="sendAI()">↑</button>
       </div>
-      <div class="save-notice" id="save-notice">✓ Changes applied to editor</div>
+      <div class="save-notice" id="save-notice">✓ Changes applied</div>
     </div>
   </div>
 
-</div>
+</div><!-- /main -->
 
 <script>
+// Image storage: key -> base64 data URL
+const images = {};
 let themeColors = { primary: '#C4622D', accent: '#D4A853', dark: '#1C1610' };
+
+function triggerUpload(inputId) {
+  document.getElementById(inputId).click();
+}
+
+function handleImage(event, key, zoneId, previewId, aspect) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    images[key] = e.target.result;
+    renderZone(key, zoneId, previewId, aspect);
+  };
+  reader.readAsDataURL(file);
+}
+
+function renderZone(key, zoneId, previewId, aspect) {
+  const zone = document.getElementById(zoneId);
+  const ph = zone.querySelector('.img-upload-placeholder');
+  if (!zone) return;
+  if (ph) ph.style.display = 'none';
+  // Remove existing preview
+  const old = document.getElementById(previewId);
+  if (old) old.remove();
+  const oldCtrl = zone.querySelector('.img-controls');
+  if (oldCtrl) oldCtrl.remove();
+  // Add image
+  const img = document.createElement('img');
+  img.id = previewId;
+  img.src = images[key];
+  img.className = 'img-preview ' + (aspect === 'portrait' ? 'portrait' : aspect === 'square' ? 'square' : '');
+  zone.classList.add('has-image');
+  // Insert before hidden input
+  const inp = zone.querySelector('input[type=file]');
+  zone.insertBefore(img, inp);
+  // Controls bar
+  const ctrl = document.createElement('div');
+  ctrl.className = 'img-controls';
+  ctrl.innerHTML = `<button class="img-btn" onclick="event.stopPropagation();triggerUpload('${inp.id}')">Change photo</button><button class="img-btn danger" onclick="event.stopPropagation();removeImage('${key}','${zoneId}','${previewId}')">Remove</button>`;
+  zone.appendChild(ctrl);
+}
+
+function removeImage(key, zoneId, previewId) {
+  delete images[key];
+  const zone = document.getElementById(zoneId);
+  const preview = document.getElementById(previewId);
+  if (preview) preview.remove();
+  const ctrl = zone.querySelector('.img-controls');
+  if (ctrl) ctrl.remove();
+  const ph = zone.querySelector('.img-upload-placeholder');
+  if (ph) ph.style.display = '';
+  zone.classList.remove('has-image');
+}
+
+// Sync duplicate zones (Photos overview mirrors individual section zones)
+function syncZone(key, zoneId, previewId) {
+  const zone = document.getElementById(zoneId);
+  if (!zone) return;
+  const aspect = zone.querySelector('.img-preview.portrait') ? 'portrait' : zone.querySelector('.img-preview.square') ? 'square' : 'landscape';
+  const ph = zone.querySelector('.img-upload-placeholder');
+  if (ph) ph.style.display = 'none';
+  const old = document.getElementById(previewId);
+  if (old) old.remove();
+  const oldCtrl = zone.querySelector('.img-controls');
+  if (oldCtrl) oldCtrl.remove();
+  const img = document.createElement('img');
+  img.id = previewId;
+  img.src = images[key];
+  img.className = 'img-preview ' + (aspect === 'portrait' ? 'portrait' : aspect === 'square' ? 'square' : '');
+  zone.classList.add('has-image');
+  const inp = zone.querySelector('input[type=file]');
+  zone.insertBefore(img, inp);
+  const ctrl = document.createElement('div');
+  ctrl.className = 'img-controls';
+  ctrl.innerHTML = `<button class="img-btn" onclick="event.stopPropagation();triggerUpload('${inp.id}')">Change</button><button class="img-btn danger" onclick="event.stopPropagation();removeImage('${key}','${zoneId}','${previewId}')">Remove</button>`;
+  zone.appendChild(ctrl);
+}
 
 function showSection(id, el) {
   document.querySelectorAll('.section-editor').forEach(s => s.classList.remove('active'));
@@ -356,35 +571,52 @@ function showSection(id, el) {
   el.classList.add('active');
 }
 
+function setTheme(p, a, d, el) {
+  themeColors = { primary: p, accent: a, dark: d };
+  document.querySelectorAll('.color-circle').forEach(c => c.classList.remove('selected'));
+  el.querySelector('.color-circle').classList.add('selected');
+}
+
+function g(id) { const el = document.getElementById(id); return el ? el.value : ''; }
+function setField(id, val) { const el = document.getElementById(id); if (el) el.value = val || ''; }
 function update() {}
 
-function setTheme(primary, accent, dark) {
-  themeColors = { primary, accent, dark };
-  document.querySelectorAll('.color-circle').forEach(c => c.classList.remove('selected'));
-  event.currentTarget.querySelector('.color-circle').classList.add('selected');
-}
-
-function g(id) {
-  const el = document.getElementById(id);
-  return el ? el.value : '';
-}
-
-function notesToChips(notes) {
-  return notes.split(',').map(n => n.trim()).filter(Boolean)
-    .map(n => `<span class="taste-chip">${n}</span>`).join('');
+function imgTag(key, style) {
+  if (!images[key]) return '';
+  return `<img src="${images[key]}" style="${style}" alt="">`;
 }
 
 function buildHTML() {
-  const p = themeColors.primary;
-  const a = themeColors.accent;
-  const d = themeColors.dark;
+  const p = themeColors.primary, a = themeColors.accent, d = themeColors.dark;
+  const w1notes = g('w1-notes').split(',').map(n=>`<span class="taste-chip">${n.trim()}</span>`).join('');
+  const w2notes = g('w2-notes').split(',').map(n=>`<span class="taste-chip">${n.trim()}</span>`).join('');
+  const w3notes = g('w3-notes').split(',').map(n=>`<span class="taste-chip">${n.trim()}</span>`).join('');
 
-  const w1notes = g('w1-notes').split(',').map(n=>n.trim()).filter(Boolean).map(n=>`<span class="taste-chip">${n}</span>`).join('');
-  const w2notes = g('w2-notes').split(',').map(n=>n.trim()).filter(Boolean).map(n=>`<span class="taste-chip">${n}</span>`).join('');
-  const w3notes = g('w3-notes').split(',').map(n=>n.trim()).filter(Boolean).map(n=>`<span class="taste-chip">${n}</span>`).join('');
+  const heroBgStyle = images['hero-bg']
+    ? `background-image: url('${images['hero-bg']}'); background-size: cover; background-position: center;`
+    : `background: linear-gradient(135deg, #2A1F12 0%, #1C1610 60%);`;
 
-  const addrHtml = g('vis-addr').replace(/\n/g,'<br>');
-  const hoursHtml = g('vis-hours').replace(/\n/g,'<br>');
+  const storyImgContent = images['story-img']
+    ? `<img src="${images['story-img']}" style="width:100%;height:100%;object-fit:cover;display:block;" alt="">`
+    : `<div style="text-align:center;padding:40px;"><span style="font-size:80px;color:${p};opacity:0.12;font-style:italic;font-family:Cormorant Garamond,serif;display:block;margin-bottom:16px;">ნადიმი</span><div style="display:inline-block;font-family:Cinzel,serif;font-size:9px;letter-spacing:0.35em;color:${p};border:1px solid ${p}66;padding:6px 16px;text-transform:uppercase;">Batumi · Georgia</div></div>`;
+
+  const batMapContent = images['bat-img']
+    ? `<img src="${images['bat-img']}" style="width:100%;height:100%;object-fit:cover;display:block;" alt="">`
+    : `<div style="text-align:center;"><div style="width:12px;height:12px;background:${p};border-radius:50%;margin:14px auto;box-shadow:0 0 0 4px ${p}26,0 0 0 8px ${p}12;"></div><span style="font-family:Cinzel,serif;font-size:14px;letter-spacing:0.3em;color:${p};text-transform:uppercase;display:block;margin-bottom:6px;">Batumi</span><span style="font-size:13px;color:#9B8A6E;font-style:italic;">Adjara, Georgia · საქართველო</span></div>`;
+
+  const restVisualContent = images['rest-img']
+    ? `<img src="${images['rest-img']}" style="width:100%;height:100%;object-fit:cover;display:block;" alt="">`
+    : `<span style="font-size:52px;color:rgba(212,168,83,0.18);font-style:italic;display:block;margin-bottom:16px;">სიმპოზიუმი</span><p style="font-size:14px;letter-spacing:0.08em;color:rgba(212,168,83,0.5);font-style:italic;text-transform:uppercase;line-height:1.7;">Restaurant Symposium<br>Batumi, Georgia<br><br>"Where wine, food and<br>conversation become one"</p>`;
+
+  const w1CardTop = images['w1-img']
+    ? `<div style="height:180px;overflow:hidden;margin:-48px -36px 24px;"><img src="${images['w1-img']}" style="width:100%;height:180px;object-fit:cover;" alt=""></div>`
+    : '';
+  const w2CardTop = images['w2-img']
+    ? `<div style="height:180px;overflow:hidden;margin:-48px -36px 24px;"><img src="${images['w2-img']}" style="width:100%;height:180px;object-fit:cover;" alt=""></div>`
+    : '';
+  const w3CardTop = images['w3-img']
+    ? `<div style="height:180px;overflow:hidden;margin:-48px -36px 24px;"><img src="${images['w3-img']}" style="width:100%;height:180px;object-fit:cover;" alt=""></div>`
+    : '';
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -394,147 +626,123 @@ function buildHTML() {
 <title>NADIMI · ნადიმი · Wine of Symposium</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --terracotta: ${p};
-  --ochre: ${a};
-  --ink: ${d};
-  --parchment: #F2E8D5;
-  --sand: #E0CEAA;
-  --dust: #9B8A6E;
-  --olive: #4A5240;
-  --clay: #7A4830;
-  --cream: #FAF5EC;
-  --dark-ink: #120E08;
-}
-html { scroll-behavior: smooth; }
-body { font-family: 'Cormorant Garamond', serif; background: var(--cream); color: var(--ink); overflow-x: hidden; }
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 24px 60px; background: rgba(250,245,236,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(196,98,45,0.12); }
-.nav-logo { display: flex; flex-direction: column; line-height: 1; text-decoration: none; }
-.nav-logo-en { font-family: 'Cinzel', serif; font-size: 20px; letter-spacing: 0.3em; color: var(--terracotta); }
-.nav-logo-ge { font-size: 13px; color: var(--dust); letter-spacing: 0.15em; font-style: italic; }
-.nav-links { display: flex; gap: 40px; list-style: none; }
-.nav-links a { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.22em; color: var(--ink); text-decoration: none; text-transform: uppercase; opacity: 0.65; transition: opacity 0.3s, color 0.3s; }
-.nav-links a:hover { opacity: 1; color: var(--terracotta); }
-.hero { min-height: 100vh; background: var(--ink); display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
-.hero-left { display: flex; flex-direction: column; justify-content: center; padding: 140px 70px 80px; position: relative; z-index: 2; }
-.hero-geo { font-size: 13px; letter-spacing: 0.3em; color: var(--ochre); margin-bottom: 10px; font-style: italic; opacity: 0; animation: fadeUp 1s ease 0.4s forwards; }
-.hero-title { font-family: 'Cinzel', serif; font-size: clamp(60px, 8vw, 110px); font-weight: 400; line-height: 0.95; letter-spacing: 0.06em; color: #F2E8D5; margin-bottom: 32px; opacity: 0; animation: fadeUp 1s ease 0.6s forwards; }
-.hero-meaning { font-size: 17px; font-style: italic; color: var(--dust); line-height: 1.7; max-width: 380px; margin-bottom: 52px; border-left: 2px solid var(--terracotta); padding-left: 20px; opacity: 0; animation: fadeUp 1s ease 0.8s forwards; }
-.hero-cta { display: inline-flex; align-items: center; gap: 14px; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ink); background: var(--ochre); padding: 15px 36px; text-decoration: none; width: fit-content; transition: background 0.3s, transform 0.3s; opacity: 0; animation: fadeUp 1s ease 1s forwards; }
-.hero-cta:hover { background: #F2E8D5; transform: translateX(4px); }
-.hero-cta::after { content: '→'; font-size: 16px; }
-.hero-right { position: relative; background: linear-gradient(135deg, #2A1F12 0%, #1C1610 60%); display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.hero-circle { position: absolute; border-radius: 50%; border: 1px solid rgba(212,168,83,0.1); }
-.hero-circle:nth-child(1) { width: 500px; height: 500px; }
-.hero-circle:nth-child(2) { width: 360px; height: 360px; border-color: rgba(212,168,83,0.07); }
-.hero-circle:nth-child(3) { width: 220px; height: 220px; border-color: rgba(212,168,83,0.13); }
-.bottle-svg { width: 220px; position: relative; z-index: 3; opacity: 0; animation: fadeUp 1.2s ease 1s forwards; }
-section { padding: 110px 60px; }
-.container { max-width: 1160px; margin: 0 auto; }
-.label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.45em; color: var(--terracotta); text-transform: uppercase; display: block; margin-bottom: 18px; }
-.title { font-family: 'Cinzel', serif; font-size: clamp(28px, 4vw, 48px); font-weight: 400; line-height: 1.15; color: var(--ink); margin-bottom: 24px; }
-.body-text { font-size: 18px; line-height: 1.9; color: var(--dust); max-width: 560px; }
-.story { background: #F2E8D5; }
-.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-.story-frame { aspect-ratio: 4/5; background: linear-gradient(145deg, rgba(196,98,45,0.08), rgba(212,168,83,0.08)); border: 1px solid rgba(196,98,45,0.2); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-.story-frame::before { content: ''; position: absolute; inset: 12px; border: 1px solid rgba(196,98,45,0.1); }
-.story-geo-text { font-size: 80px; color: var(--terracotta); opacity: 0.12; line-height: 1; font-style: italic; font-family: 'Cormorant Garamond', serif; display: block; margin-bottom: 16px; }
-.city-badge { display: inline-block; font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.35em; color: var(--terracotta); border: 1px solid rgba(196,98,45,0.4); padding: 6px 16px; text-transform: uppercase; }
-.stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 52px; border-top: 1px solid rgba(196,98,45,0.15); }
-.stat { padding: 28px 0; border-right: 1px solid rgba(196,98,45,0.15); text-align: center; }
-.stat:last-child { border-right: none; }
-.stat-n { font-family: 'Cinzel', serif; font-size: 36px; color: var(--terracotta); display: block; margin-bottom: 4px; }
-.stat-l { font-size: 12px; letter-spacing: 0.1em; color: var(--dust); text-transform: uppercase; }
-.wines { background: var(--ink); }
-.wines .title { color: #F2E8D5; }
-.wines .label { color: var(--ochre); }
-.wines-header { text-align: center; max-width: 600px; margin: 0 auto 70px; }
-.wines-header .body-text { margin: 0 auto; text-align: center; color: var(--dust); }
-.wines-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(212,168,83,0.1); }
-.wine-card { background: #1C1610; padding: 48px 36px; transition: background 0.4s; }
-.wine-card:hover { background: #231a0f; }
-.wine-card-top { border-bottom: 1px solid rgba(212,168,83,0.12); padding-bottom: 24px; margin-bottom: 24px; }
-.wine-color-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 8px; vertical-align: middle; }
-.wine-type-label { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.3em; color: var(--ochre); text-transform: uppercase; vertical-align: middle; }
-.wine-name { font-size: clamp(26px, 2.5vw, 36px); font-style: italic; color: #F2E8D5; margin: 14px 0 4px; line-height: 1.1; }
-.wine-geo { font-size: 13px; color: var(--dust); letter-spacing: 0.1em; font-style: italic; }
-.wine-desc { font-size: 15px; line-height: 1.85; color: var(--dust); margin: 20px 0 24px; }
-.tasting-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 28px; }
-.taste-chip { font-size: 10px; letter-spacing: 0.08em; padding: 3px 10px; border: 1px solid rgba(212,168,83,0.25); color: rgba(212,168,83,0.7); text-transform: uppercase; }
-.wine-footer { display: flex; justify-content: space-between; align-items: flex-end; }
-.wine-price { font-family: 'Cormorant Garamond', serif; font-size: 30px; color: #F2E8D5; }
-.wine-year { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.2em; color: var(--dust); }
-.meaning { background: var(--terracotta); text-align: center; padding: 100px 60px; }
-.meaning-word { font-size: clamp(48px, 9vw, 120px); font-style: italic; color: rgba(255,255,255,0.1); line-height: 1; margin-bottom: -30px; display: block; font-family: 'Cormorant Garamond', serif; }
-.meaning-quote { font-size: clamp(22px, 3.5vw, 40px); font-style: italic; color: #F2E8D5; line-height: 1.5; max-width: 780px; margin: 0 auto 28px; }
-.meaning-sub { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.4em; color: rgba(242,232,213,0.5); text-transform: uppercase; }
-.meaning-border { width: 60px; height: 1px; background: rgba(242,232,213,0.3); margin: 24px auto; }
-.batumi { background: #FAF5EC; }
-.batumi-inner { display: grid; grid-template-columns: 1fr 1.1fr; gap: 90px; align-items: center; }
-.batumi-map { background: #F2E8D5; border: 1px solid rgba(196,98,45,0.15); aspect-ratio: 1; display: flex; align-items: center; justify-content: center; position: relative; }
-.batumi-map::before { content: ''; position: absolute; inset: 20px; border: 1px dashed rgba(196,98,45,0.18); }
-.map-city { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 0.3em; color: var(--terracotta); text-transform: uppercase; display: block; margin-bottom: 6px; text-align: center; }
-.map-country { font-size: 13px; color: var(--dust); font-style: italic; display: block; text-align: center; }
-.map-dot { width: 12px; height: 12px; background: var(--terracotta); border-radius: 50%; margin: 14px auto; box-shadow: 0 0 0 4px rgba(196,98,45,0.15), 0 0 0 8px rgba(196,98,45,0.07); }
-.batumi-features { display: flex; flex-direction: column; gap: 36px; margin-top: 44px; }
-.b-feature { display: flex; gap: 20px; align-items: flex-start; }
-.b-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
-.b-title { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.2em; color: var(--ink); text-transform: uppercase; margin-bottom: 6px; }
-.b-text { font-size: 15px; line-height: 1.8; color: var(--dust); }
-.restaurant { background: var(--olive); padding: 100px 60px; }
-.restaurant .title { color: #F2E8D5; }
-.restaurant .label { color: var(--ochre); }
-.restaurant-inner { display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center; }
-.rest-body { font-size: 18px; line-height: 1.9; color: rgba(242,232,213,0.65); max-width: 540px; }
-.rest-tag { display: inline-flex; align-items: center; gap: 10px; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.25em; color: var(--ochre); border: 1px solid rgba(212,168,83,0.3); padding: 10px 22px; margin-top: 40px; text-transform: uppercase; text-decoration: none; transition: border-color 0.3s, color 0.3s; }
-.rest-tag:hover { border-color: var(--ochre); color: #F2E8D5; }
-.rest-visual { border: 1px solid rgba(212,168,83,0.2); padding: 44px; text-align: center; }
-.rest-name-geo { font-size: 52px; color: rgba(212,168,83,0.18); font-style: italic; display: block; margin-bottom: 16px; }
-.rest-desc { font-size: 14px; letter-spacing: 0.08em; color: rgba(212,168,83,0.5); font-style: italic; text-transform: uppercase; line-height: 1.7; }
-.visit { background: #F2E8D5; }
-.visit-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-.visit-info { display: flex; flex-direction: column; gap: 32px; margin-top: 44px; }
-.info-label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em; color: var(--terracotta); text-transform: uppercase; margin-bottom: 8px; display: block; }
-.info-text { font-size: 17px; line-height: 1.7; color: var(--dust); }
-.visit-form { display: flex; flex-direction: column; gap: 14px; }
-.visit-form input, .visit-form textarea { width: 100%; background: white; border: 1px solid rgba(196,98,45,0.2); font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--ink); padding: 14px 18px; outline: none; transition: border-color 0.3s; }
-.visit-form input::placeholder, .visit-form textarea::placeholder { color: var(--dust); opacity: 0.6; }
-.visit-form input:focus, .visit-form textarea:focus { border-color: var(--terracotta); }
-.visit-form textarea { height: 110px; resize: none; }
-.btn-send { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: #F2E8D5; background: var(--terracotta); border: none; padding: 16px; cursor: pointer; transition: background 0.3s; }
-.btn-send:hover { background: var(--clay); }
-footer { background: #120E08; padding: 60px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 40px; }
-.f-logo { text-align: center; }
-.f-logo-en { font-family: 'Cinzel', serif; font-size: 18px; letter-spacing: 0.35em; color: var(--ochre); display: block; }
-.f-logo-ge { font-size: 12px; color: var(--dust); font-style: italic; letter-spacing: 0.15em; }
-.f-left { font-size: 12px; letter-spacing: 0.08em; color: var(--dust); }
-.f-right { display: flex; gap: 24px; list-style: none; justify-content: flex-end; }
-.f-right a { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.2em; color: var(--dust); text-decoration: none; text-transform: uppercase; transition: color 0.3s; }
-.f-right a:hover { color: var(--ochre); }
-@keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
-.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.9s ease, transform 0.9s ease; }
-.reveal.on { opacity: 1; transform: none; }
-.delay-1 { transition-delay: 0.12s; }
-.delay-2 { transition-delay: 0.24s; }
-.delay-3 { transition-delay: 0.36s; }
-@media (max-width: 900px) {
-  nav { padding: 20px 24px; } .nav-links { display: none; } section { padding: 72px 24px; }
-  .hero { grid-template-columns: 1fr; } .hero-right { display: none; }
-  .story-grid, .batumi-inner, .restaurant-inner, .visit-inner { grid-template-columns: 1fr; }
-  .wines-grid { grid-template-columns: 1fr; }
-  footer { grid-template-columns: 1fr; text-align: center; } .f-right { justify-content: center; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--t:${p};--o:${a};--ink:${d};--parch:#F2E8D5;--dust:#9B8A6E;--olive:#4A5240;--clay:#7A4830;--cream:#FAF5EC;}
+html{scroll-behavior:smooth;}
+body{font-family:'Cormorant Garamond',serif;background:var(--cream);color:var(--ink);overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:24px 60px;background:rgba(250,245,236,0.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(196,98,45,0.12);}
+.nav-logo{display:flex;flex-direction:column;line-height:1;text-decoration:none;}
+.nav-logo-en{font-family:'Cinzel',serif;font-size:20px;letter-spacing:0.3em;color:var(--t);}
+.nav-logo-ge{font-size:13px;color:var(--dust);letter-spacing:0.15em;font-style:italic;}
+.nav-links{display:flex;gap:40px;list-style:none;}
+.nav-links a{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.22em;color:var(--ink);text-decoration:none;text-transform:uppercase;opacity:.65;transition:opacity .3s,color .3s;}
+.nav-links a:hover{opacity:1;color:var(--t);}
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden;}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:140px 70px 80px;position:relative;z-index:2;background:var(--ink);}
+.hero-geo{font-size:13px;letter-spacing:0.3em;color:var(--o);margin-bottom:10px;font-style:italic;opacity:0;animation:fadeUp 1s ease .4s forwards;}
+.hero-title{font-family:'Cinzel',serif;font-size:clamp(60px,8vw,110px);font-weight:400;line-height:.95;letter-spacing:.06em;color:#F2E8D5;margin-bottom:32px;opacity:0;animation:fadeUp 1s ease .6s forwards;}
+.hero-meaning{font-size:17px;font-style:italic;color:var(--dust);line-height:1.7;max-width:380px;margin-bottom:52px;border-left:2px solid var(--t);padding-left:20px;opacity:0;animation:fadeUp 1s ease .8s forwards;}
+.hero-cta{display:inline-flex;align-items:center;gap:14px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--ink);background:var(--o);padding:15px 36px;text-decoration:none;width:fit-content;transition:background .3s,transform .3s;opacity:0;animation:fadeUp 1s ease 1s forwards;}
+.hero-cta:hover{background:#F2E8D5;transform:translateX(4px);}
+.hero-cta::after{content:'→';font-size:16px;}
+.hero-right{position:relative;${heroBgStyle}display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.hero-right::before{content:'';position:absolute;inset:0;background:rgba(28,22,16,0.45);}
+.hero-circle{position:absolute;border-radius:50%;border:1px solid rgba(212,168,83,0.12);}
+.hero-circle:nth-child(1){width:500px;height:500px;}
+.hero-circle:nth-child(2){width:360px;height:360px;}
+.hero-circle:nth-child(3){width:220px;height:220px;}
+.bottle-svg{width:200px;position:relative;z-index:3;opacity:0;animation:fadeUp 1.2s ease 1s forwards;}
+section{padding:110px 60px;}
+.container{max-width:1160px;margin:0 auto;}
+.label{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.45em;color:var(--t);text-transform:uppercase;display:block;margin-bottom:18px;}
+.title{font-family:'Cinzel',serif;font-size:clamp(28px,4vw,48px);font-weight:400;line-height:1.15;color:var(--ink);margin-bottom:24px;}
+.body-text{font-size:18px;line-height:1.9;color:var(--dust);max-width:560px;}
+.story{background:#F2E8D5;}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.story-frame{aspect-ratio:4/5;border:1px solid rgba(196,98,45,0.2);overflow:hidden;position:relative;}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);margin-top:52px;border-top:1px solid rgba(196,98,45,0.15);}
+.stat{padding:28px 0;border-right:1px solid rgba(196,98,45,0.15);text-align:center;}
+.stat:last-child{border-right:none;}
+.stat-n{font-family:'Cinzel',serif;font-size:36px;color:var(--t);display:block;margin-bottom:4px;}
+.stat-l{font-size:12px;letter-spacing:.1em;color:var(--dust);text-transform:uppercase;}
+.wines{background:var(--ink);}
+.wines .title{color:#F2E8D5;}
+.wines .label{color:var(--o);}
+.wines-header{text-align:center;max-width:600px;margin:0 auto 70px;}
+.wines-header .body-text{margin:0 auto;text-align:center;color:var(--dust);}
+.wines-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(212,168,83,0.1);}
+.wine-card{background:#1C1610;padding:48px 36px;transition:background .4s;overflow:hidden;}
+.wine-card:hover{background:#231a0f;}
+.wine-card-top{border-bottom:1px solid rgba(212,168,83,0.12);padding-bottom:24px;margin-bottom:24px;}
+.wine-color-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:8px;vertical-align:middle;}
+.wine-type-label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.3em;color:var(--o);text-transform:uppercase;vertical-align:middle;}
+.wine-name{font-size:clamp(26px,2.5vw,36px);font-style:italic;color:#F2E8D5;margin:14px 0 4px;line-height:1.1;}
+.wine-geo{font-size:13px;color:var(--dust);letter-spacing:.1em;font-style:italic;}
+.wine-desc{font-size:15px;line-height:1.85;color:var(--dust);margin:20px 0 24px;}
+.tasting-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px;}
+.taste-chip{font-size:10px;letter-spacing:.08em;padding:3px 10px;border:1px solid rgba(212,168,83,0.25);color:rgba(212,168,83,0.7);text-transform:uppercase;}
+.wine-footer{display:flex;justify-content:space-between;align-items:flex-end;}
+.wine-price{font-family:'Cormorant Garamond',serif;font-size:30px;color:#F2E8D5;}
+.wine-year{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.2em;color:var(--dust);}
+.meaning{background:var(--t);text-align:center;padding:100px 60px;}
+.meaning-word{font-size:clamp(48px,9vw,120px);font-style:italic;color:rgba(255,255,255,.1);line-height:1;margin-bottom:-30px;display:block;font-family:'Cormorant Garamond',serif;}
+.meaning-quote{font-size:clamp(22px,3.5vw,40px);font-style:italic;color:#F2E8D5;line-height:1.5;max-width:780px;margin:0 auto 28px;}
+.meaning-sub{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.4em;color:rgba(242,232,213,.5);text-transform:uppercase;}
+.meaning-border{width:60px;height:1px;background:rgba(242,232,213,.3);margin:24px auto;}
+.batumi{background:var(--cream);}
+.batumi-inner{display:grid;grid-template-columns:1fr 1.1fr;gap:90px;align-items:center;}
+.batumi-map{border:1px solid rgba(196,98,45,0.15);aspect-ratio:1;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:#F2E8D5;}
+.batumi-features{display:flex;flex-direction:column;gap:36px;margin-top:44px;}
+.b-feature{display:flex;gap:20px;align-items:flex-start;}
+.b-icon{font-size:22px;flex-shrink:0;margin-top:2px;}
+.b-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.2em;color:var(--ink);text-transform:uppercase;margin-bottom:6px;}
+.b-text{font-size:15px;line-height:1.8;color:var(--dust);}
+.restaurant{background:var(--olive);padding:100px 60px;}
+.restaurant .title{color:#F2E8D5;}
+.restaurant .label{color:var(--o);}
+.restaurant-inner{display:grid;grid-template-columns:1.2fr 1fr;gap:80px;align-items:center;}
+.rest-body{font-size:18px;line-height:1.9;color:rgba(242,232,213,.65);max-width:540px;}
+.rest-tag{display:inline-flex;align-items:center;gap:10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:.25em;color:var(--o);border:1px solid rgba(212,168,83,0.3);padding:10px 22px;margin-top:40px;text-transform:uppercase;text-decoration:none;transition:border-color .3s,color .3s;}
+.rest-tag:hover{border-color:var(--o);color:#F2E8D5;}
+.rest-visual{border:1px solid rgba(212,168,83,0.2);overflow:hidden;min-height:280px;display:flex;align-items:center;justify-content:center;text-align:center;padding:${images['rest-img'] ? '0' : '44px'};}
+.visit{background:#F2E8D5;}
+.visit-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.visit-info{display:flex;flex-direction:column;gap:32px;margin-top:44px;}
+.info-label{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.3em;color:var(--t);text-transform:uppercase;margin-bottom:8px;display:block;}
+.info-text{font-size:17px;line-height:1.7;color:var(--dust);}
+.visit-form{display:flex;flex-direction:column;gap:14px;}
+.visit-form input,.visit-form textarea{width:100%;background:white;border:1px solid rgba(196,98,45,0.2);font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--ink);padding:14px 18px;outline:none;transition:border-color .3s;}
+.visit-form input:focus,.visit-form textarea:focus{border-color:var(--t);}
+.visit-form textarea{height:110px;resize:none;}
+.btn-submit{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#F2E8D5;background:var(--t);border:none;padding:16px;cursor:pointer;transition:background .3s;width:100%;}
+.btn-submit:hover{background:var(--clay);}
+footer{background:#120E08;padding:60px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:40px;}
+.f-logo{text-align:center;}
+.f-logo-en{font-family:'Cinzel',serif;font-size:18px;letter-spacing:.35em;color:var(--o);display:block;}
+.f-logo-ge{font-size:12px;color:var(--dust);font-style:italic;letter-spacing:.15em;}
+.f-left{font-size:12px;letter-spacing:.08em;color:var(--dust);}
+.f-right{display:flex;gap:24px;list-style:none;justify-content:flex-end;}
+.f-right a{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.2em;color:var(--dust);text-decoration:none;text-transform:uppercase;transition:color .3s;}
+.f-right a:hover{color:var(--o);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .9s ease,transform .9s ease;}
+.reveal.on{opacity:1;transform:none;}
+.delay-1{transition-delay:.12s}.delay-2{transition-delay:.24s}.delay-3{transition-delay:.36s}
+@media(max-width:900px){
+  nav{padding:20px 24px;}.nav-links{display:none;}section{padding:72px 24px;}
+  .hero{grid-template-columns:1fr;}.hero-right{display:none;}
+  .story-grid,.batumi-inner,.restaurant-inner,.visit-inner{grid-template-columns:1fr;}
+  .wines-grid{grid-template-columns:1fr;}
+  footer{grid-template-columns:1fr;text-align:center;}.f-right{justify-content:center;}
 }
 </style>
 </head>
 <body>
 <nav>
   <a class="nav-logo" href="#"><span class="nav-logo-en">${g('hero-title')}</span><span class="nav-logo-ge">ნადიმი</span></a>
-  <ul class="nav-links">
-    <li><a href="#story">Our Story</a></li><li><a href="#wines">Wines</a></li>
-    <li><a href="#batumi">Batumi</a></li><li><a href="#visit">Visit</a></li>
-  </ul>
+  <ul class="nav-links"><li><a href="#story">Our Story</a></li><li><a href="#wines">Wines</a></li><li><a href="#batumi">Batumi</a></li><li><a href="#visit">Visit</a></li></ul>
 </nav>
+
 <div class="hero">
   <div class="hero-left">
     <p class="hero-geo">${g('hero-geo')}</p>
@@ -546,21 +754,21 @@ footer { background: #120E08; padding: 60px; display: grid; grid-template-column
     <div class="hero-circle"></div><div class="hero-circle"></div><div class="hero-circle"></div>
     <svg class="bottle-svg" viewBox="0 0 200 500" xmlns="http://www.w3.org/2000/svg" fill="none">
       <path d="M80 0 L80 60 Q40 100 30 180 L30 420 Q30 480 100 480 Q170 480 170 420 L170 180 Q160 100 120 60 L120 0 Z" fill="#2A1A08" stroke="${a}" stroke-width="1" opacity="0.9"/>
-      <rect x="42" y="220" width="116" height="140" rx="2" fill="#1C1610" stroke="${a}" stroke-width="0.8" opacity="0.9"/>
-      <rect x="48" y="226" width="104" height="128" rx="1" fill="none" stroke="rgba(212,168,83,0.3)" stroke-width="0.5"/>
-      <text x="100" y="268" text-anchor="middle" font-family="Cinzel, serif" font-size="13" fill="${a}" letter-spacing="3">${g('hero-title')}</text>
-      <text x="100" y="286" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="9" fill="rgba(212,168,83,0.5)" letter-spacing="2" font-style="italic">ნადიმი</text>
+      <rect x="42" y="220" width="116" height="140" rx="2" fill="#1C1610" stroke="${a}" stroke-width="0.8"/>
+      <text x="100" y="268" text-anchor="middle" font-family="Cinzel,serif" font-size="13" fill="${a}" letter-spacing="3">${g('hero-title')}</text>
+      <text x="100" y="286" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="9" fill="rgba(212,168,83,0.5)" letter-spacing="2" font-style="italic">ნადიმი</text>
       <line x1="60" y1="296" x2="140" y2="296" stroke="rgba(212,168,83,0.2)" stroke-width="0.5"/>
       <circle cx="100" cy="320" r="16" fill="none" stroke="rgba(212,168,83,0.25)" stroke-width="0.5"/>
       <circle cx="100" cy="320" r="4" fill="rgba(212,168,83,0.3)"/>
-      <text x="100" y="354" text-anchor="middle" font-family="Cinzel, serif" font-size="8" fill="rgba(212,168,83,0.4)" letter-spacing="2">BATUMI · GEORGIA</text>
-      <rect x="76" y="30" width="48" height="32" rx="1" fill="#1C1610" stroke="${a}" stroke-width="0.6" opacity="0.8"/>
-      <text x="100" y="51" text-anchor="middle" font-family="Cinzel, serif" font-size="7" fill="${a}" letter-spacing="1.5">${g('w1-year')}</text>
+      <text x="100" y="354" text-anchor="middle" font-family="Cinzel,serif" font-size="8" fill="rgba(212,168,83,0.4)" letter-spacing="2">BATUMI · GEORGIA</text>
+      <rect x="76" y="30" width="48" height="32" rx="1" fill="#1C1610" stroke="${a}" stroke-width="0.6"/>
+      <text x="100" y="51" text-anchor="middle" font-family="Cinzel,serif" font-size="7" fill="${a}" letter-spacing="1.5">${g('w1-year')}</text>
     </svg>
   </div>
 </div>
+
 <section id="story" class="story"><div class="container"><div class="story-grid">
-  <div class="reveal"><div class="story-frame"><div style="text-align:center;padding:40px;"><span class="story-geo-text">ნადიმი</span><div class="city-badge">Batumi · Georgia</div></div></div></div>
+  <div class="reveal"><div class="story-frame">${storyImgContent}</div></div>
   <div>
     <span class="label reveal">${g('story-label')}</span>
     <h2 class="title reveal delay-1">${g('story-title')}</h2>
@@ -573,15 +781,18 @@ footer { background: #120E08; padding: 60px; display: grid; grid-template-column
     </div>
   </div>
 </div></div></section>
+
 <section id="wines" class="wines"><div class="container">
   <div class="wines-header reveal"><span class="label">The Collection</span><h2 class="title">Wines of Georgia</h2><p class="body-text">Three expressions of ancient Georgian grape varieties, crafted for the modern table.</p></div>
   <div class="wines-grid">
-    <div class="wine-card reveal"><div class="wine-card-top"><span class="wine-color-dot" style="background:#C9995A;"></span><span class="wine-type-label">${g('w1-type')}</span></div><h3 class="wine-name">${g('w1-name')}</h3><p class="wine-geo">${g('w1-geo')}</p><p class="wine-desc">${g('w1-desc')}</p><div class="tasting-row">${w1notes}</div><div class="wine-footer"><span class="wine-price">${g('w1-price')}</span><span class="wine-year">${g('w1-year')}</span></div></div>
-    <div class="wine-card reveal delay-1"><div class="wine-card-top"><span class="wine-color-dot" style="background:#6B1A2A;"></span><span class="wine-type-label">${g('w2-type')}</span></div><h3 class="wine-name">${g('w2-name')}</h3><p class="wine-geo">${g('w2-geo')}</p><p class="wine-desc">${g('w2-desc')}</p><div class="tasting-row">${w2notes}</div><div class="wine-footer"><span class="wine-price">${g('w2-price')}</span><span class="wine-year">${g('w2-year')}</span></div></div>
-    <div class="wine-card reveal delay-2"><div class="wine-card-top"><span class="wine-color-dot" style="background:#F0D080;"></span><span class="wine-type-label">${g('w3-type')}</span></div><h3 class="wine-name">${g('w3-name')}</h3><p class="wine-geo">${g('w3-geo')}</p><p class="wine-desc">${g('w3-desc')}</p><div class="tasting-row">${w3notes}</div><div class="wine-footer"><span class="wine-price">${g('w3-price')}</span><span class="wine-year">${g('w3-year')}</span></div></div>
+    <div class="wine-card reveal">${w1CardTop}<div class="wine-card-top"><span class="wine-color-dot" style="background:#C9995A;"></span><span class="wine-type-label">${g('w1-type')}</span></div><h3 class="wine-name">${g('w1-name')}</h3><p class="wine-geo">${g('w1-geo')}</p><p class="wine-desc">${g('w1-desc')}</p><div class="tasting-row">${w1notes}</div><div class="wine-footer"><span class="wine-price">${g('w1-price')}</span><span class="wine-year">${g('w1-year')}</span></div></div>
+    <div class="wine-card reveal delay-1">${w2CardTop}<div class="wine-card-top"><span class="wine-color-dot" style="background:#6B1A2A;"></span><span class="wine-type-label">${g('w2-type')}</span></div><h3 class="wine-name">${g('w2-name')}</h3><p class="wine-geo">${g('w2-geo')}</p><p class="wine-desc">${g('w2-desc')}</p><div class="tasting-row">${w2notes}</div><div class="wine-footer"><span class="wine-price">${g('w2-price')}</span><span class="wine-year">${g('w2-year')}</span></div></div>
+    <div class="wine-card reveal delay-2">${w3CardTop}<div class="wine-card-top"><span class="wine-color-dot" style="background:#F0D080;"></span><span class="wine-type-label">${g('w3-type')}</span></div><h3 class="wine-name">${g('w3-name')}</h3><p class="wine-geo">${g('w3-geo')}</p><p class="wine-desc">${g('w3-desc')}</p><div class="tasting-row">${w3notes}</div><div class="wine-footer"><span class="wine-price">${g('w3-price')}</span><span class="wine-year">${g('w3-year')}</span></div></div>
   </div>
 </div></section>
-<div class="meaning"><span class="meaning-word">${g('q-word')}</span><blockquote class="meaning-quote reveal">${g('q-text')}</blockquote><div class="meaning-border"></div><p class="meaning-sub">${g('q-sub')}</p></div>
+
+<div class="meaning"><span class="meaning-word">${g('q-word')}</span><blockquote class="meaning-quote">${g('q-text')}</blockquote><div class="meaning-border"></div><p class="meaning-sub">${g('q-sub')}</p></div>
+
 <section id="batumi" class="batumi"><div class="container"><div class="batumi-inner">
   <div>
     <span class="label reveal">The Place</span>
@@ -593,20 +804,22 @@ footer { background: #120E08; padding: 60px; display: grid; grid-template-column
       <div class="b-feature reveal delay-2"><div class="b-icon">${g('bf3-i')}</div><div><p class="b-title">${g('bf3-t')}</p><p class="b-text">${g('bf3-d')}</p></div></div>
     </div>
   </div>
-  <div class="batumi-map reveal delay-2"><div><div class="map-dot"></div><span class="map-city">Batumi</span><span class="map-country">Adjara, Georgia · საქართველო</span></div></div>
+  <div class="batumi-map reveal delay-2">${batMapContent}</div>
 </div></div></section>
+
 <section class="restaurant"><div class="container"><div class="restaurant-inner">
   <div><span class="label reveal">Our Home</span><h2 class="title reveal delay-1">${g('rest-title')}</h2><p class="rest-body reveal delay-2">${g('rest-body')}</p><a href="#visit" class="rest-tag reveal delay-2">${g('rest-btn')}</a></div>
-  <div class="rest-visual reveal delay-2"><span class="rest-name-geo">სიმპოზიუმი</span><p class="rest-desc">Restaurant Symposium<br>Batumi, Georgia<br><br>"Where wine, food and<br>conversation become one"</p></div>
+  <div class="rest-visual reveal delay-2">${restVisualContent}</div>
 </div></div></section>
+
 <section id="visit" class="visit"><div class="container"><div class="visit-inner">
   <div>
     <span class="label reveal">Find Us</span>
     <h2 class="title reveal delay-1">${g('vis-title')}</h2>
     <p class="body-text reveal delay-2">${g('vis-body')}</p>
     <div class="visit-info reveal delay-2">
-      <div><span class="info-label">Location</span><p class="info-text">${addrHtml}</p></div>
-      <div><span class="info-label">Hours</span><p class="info-text">${hoursHtml}</p></div>
+      <div><span class="info-label">Location</span><p class="info-text">${g('vis-addr').replace(/\n/g,'<br>')}</p></div>
+      <div><span class="info-label">Hours</span><p class="info-text">${g('vis-hours').replace(/\n/g,'<br>')}</p></div>
       <div><span class="info-label">Reservations</span><p class="info-text">${g('vis-res')}</p></div>
     </div>
   </div>
@@ -614,19 +827,20 @@ footer { background: #120E08; padding: 60px; display: grid; grid-template-column
     <input type="text" placeholder="Your Name">
     <input type="email" placeholder="Email Address">
     <input type="text" placeholder="Preferred Date & Time">
-    <textarea placeholder="Number of guests, dietary notes, or a message…"></textarea>
-    <button class="btn-send">Send Reservation Request</button>
+    <textarea placeholder="Number of guests, notes or a message…"></textarea>
+    <button class="btn-submit">Send Reservation Request</button>
   </div></div>
 </div></div></section>
+
 <footer>
   <p class="f-left">${g('foot-copy')}<br>${g('foot-city')}</p>
   <div class="f-logo"><span class="f-logo-en">${g('hero-title')}</span><span class="f-logo-ge">ნადიმი</span></div>
   <ul class="f-right"><li><a href="#story">Story</a></li><li><a href="#wines">Wines</a></li><li><a href="#batumi">Batumi</a></li><li><a href="#visit">Visit</a></li></ul>
 </footer>
 <script>
-const reveals = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }); }, { threshold: 0.1 });
-reveals.forEach(el => io.observe(el));
+const r=document.querySelectorAll('.reveal');
+const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');io.unobserve(x.target);}});},{threshold:0.1});
+r.forEach(el=>io.observe(el));
 <\/script>
 </body>
 </html>`;
@@ -641,123 +855,73 @@ function downloadSite() {
   a.click();
 }
 
-function quickAsk(text) {
-  document.getElementById('ai-input').value = text;
-  sendAI();
-}
+function quickAsk(text) { document.getElementById('ai-input').value = text; sendAI(); }
 
-function setField(id, value) {
-  const el = document.getElementById(id);
-  if (el) el.value = value;
-}
+function setField(id, val) { const el = document.getElementById(id); if (el && val !== undefined) el.value = val; }
 
 async function sendAI() {
   const input = document.getElementById('ai-input');
   const msg = input.value.trim();
   if (!msg) return;
-
   input.value = '';
-  const btn = document.getElementById('btn-send');
-  btn.disabled = true;
-
+  document.getElementById('btn-send').disabled = true;
   addMsg(msg, 'user');
   const typing = addTyping();
 
-  const currentData = {
-    hero: { title: g('hero-title'), geo: g('hero-geo'), meaning: g('hero-meaning'), cta: g('hero-cta') },
-    story: { label: g('story-label'), title: g('story-title'), p1: g('story-p1'), p2: g('story-p2'), stat1n: g('stat1-n'), stat1l: g('stat1-l'), stat2n: g('stat2-n'), stat2l: g('stat2-l'), stat3n: g('stat3-n'), stat3l: g('stat3-l') },
-    wines: [
-      { name: g('w1-name'), geo: g('w1-geo'), type: g('w1-type'), desc: g('w1-desc'), price: g('w1-price'), year: g('w1-year'), notes: g('w1-notes') },
-      { name: g('w2-name'), geo: g('w2-geo'), type: g('w2-type'), desc: g('w2-desc'), price: g('w2-price'), year: g('w2-year'), notes: g('w2-notes') },
-      { name: g('w3-name'), geo: g('w3-geo'), type: g('w3-type'), desc: g('w3-desc'), price: g('w3-price'), year: g('w3-year'), notes: g('w3-notes') }
+  const data = {
+    hero:{title:g('hero-title'),geo:g('hero-geo'),meaning:g('hero-meaning'),cta:g('hero-cta')},
+    story:{label:g('story-label'),title:g('story-title'),p1:g('story-p1'),p2:g('story-p2'),stat1n:g('stat1-n'),stat1l:g('stat1-l'),stat2n:g('stat2-n'),stat2l:g('stat2-l'),stat3n:g('stat3-n'),stat3l:g('stat3-l')},
+    wines:[
+      {name:g('w1-name'),geo:g('w1-geo'),type:g('w1-type'),desc:g('w1-desc'),price:g('w1-price'),year:g('w1-year'),notes:g('w1-notes')},
+      {name:g('w2-name'),geo:g('w2-geo'),type:g('w2-type'),desc:g('w2-desc'),price:g('w2-price'),year:g('w2-year'),notes:g('w2-notes')},
+      {name:g('w3-name'),geo:g('w3-geo'),type:g('w3-type'),desc:g('w3-desc'),price:g('w3-price'),year:g('w3-year'),notes:g('w3-notes')}
     ],
-    quote: { word: g('q-word'), text: g('q-text'), sub: g('q-sub') },
-    batumi: { title: g('bat-title'), body: g('bat-body'), f1t: g('bf1-t'), f1i: g('bf1-i'), f1d: g('bf1-d'), f2t: g('bf2-t'), f2i: g('bf2-i'), f2d: g('bf2-d'), f3t: g('bf3-t'), f3i: g('bf3-i'), f3d: g('bf3-d') },
-    restaurant: { title: g('rest-title'), body: g('rest-body'), btn: g('rest-btn') },
-    visit: { title: g('vis-title'), body: g('vis-body'), addr: g('vis-addr'), hours: g('vis-hours'), res: g('vis-res') },
-    footer: { copy: g('foot-copy'), city: g('foot-city') }
+    quote:{word:g('q-word'),text:g('q-text'),sub:g('q-sub')},
+    batumi:{title:g('bat-title'),body:g('bat-body'),f1t:g('bf1-t'),f1i:g('bf1-i'),f1d:g('bf1-d'),f2t:g('bf2-t'),f2i:g('bf2-i'),f2d:g('bf2-d'),f3t:g('bf3-t'),f3i:g('bf3-i'),f3d:g('bf3-d')},
+    restaurant:{title:g('rest-title'),body:g('rest-body'),btn:g('rest-btn')},
+    visit:{title:g('vis-title'),body:g('vis-body'),addr:g('vis-addr'),hours:g('vis-hours'),res:g('vis-res')},
+    footer:{copy:g('foot-copy'),city:g('foot-city')}
   };
 
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: `You are an editor for a Georgian wine brand website called NADIMI (Restaurant Symposium, Batumi). The user will ask you to change specific content. You must return ONLY a valid JSON object with the same structure as the input, with only the changed fields updated. Do not include any explanation, markdown, or text outside the JSON. Keep unchanged fields exactly as they are. For wines array, wines[0] = Rkatsiteli (amber), wines[1] = Saperavi (red), wines[2] = Mtsvane (white).`,
-        messages: [{ role: 'user', content: `Current site data:\n${JSON.stringify(currentData, null, 2)}\n\nUser request: "${msg}"\n\nReturn the complete updated JSON object with only the requested changes applied.` }]
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system:`You are an editor for the NADIMI wine brand website (Restaurant Symposium, Batumi, Georgia). Return ONLY a valid JSON object with the same structure as the input, with only the requested fields changed. No markdown, no explanation, just JSON.`,
+        messages:[{role:'user',content:`Current data:\n${JSON.stringify(data,null,2)}\n\nRequest: "${msg}"\n\nReturn the complete updated JSON.`}]
       })
     });
-
-    const data = await res.json();
+    const json = await res.json();
     typing.remove();
+    const text = (json.content||[]).map(c=>c.text||'').join('');
+    const u = JSON.parse(text.replace(/```json|```/g,'').trim());
 
-    const text = data.content?.map(c => c.text || '').join('') || '';
-    const clean = text.replace(/```json|```/g, '').trim();
+    if(u.hero){setField('hero-title',u.hero.title);setField('hero-geo',u.hero.geo);setField('hero-meaning',u.hero.meaning);setField('hero-cta',u.hero.cta);}
+    if(u.story){setField('story-label',u.story.label);setField('story-title',u.story.title);setField('story-p1',u.story.p1);setField('story-p2',u.story.p2);setField('stat1-n',u.story.stat1n);setField('stat1-l',u.story.stat1l);setField('stat2-n',u.story.stat2n);setField('stat2-l',u.story.stat2l);setField('stat3-n',u.story.stat3n);setField('stat3-l',u.story.stat3l);}
+    if(u.wines){['w1','w2','w3'].forEach((pre,i)=>{if(!u.wines[i])return;const w=u.wines[i];setField(pre+'-name',w.name);setField(pre+'-geo',w.geo);setField(pre+'-type',w.type);setField(pre+'-desc',w.desc);setField(pre+'-price',w.price);setField(pre+'-year',w.year);setField(pre+'-notes',w.notes);});}
+    if(u.quote){setField('q-word',u.quote.word);setField('q-text',u.quote.text);setField('q-sub',u.quote.sub);}
+    if(u.batumi){setField('bat-title',u.batumi.title);setField('bat-body',u.batumi.body);setField('bf1-t',u.batumi.f1t);setField('bf1-i',u.batumi.f1i);setField('bf1-d',u.batumi.f1d);setField('bf2-t',u.batumi.f2t);setField('bf2-i',u.batumi.f2i);setField('bf2-d',u.batumi.f2d);setField('bf3-t',u.batumi.f3t);setField('bf3-i',u.batumi.f3i);setField('bf3-d',u.batumi.f3d);}
+    if(u.restaurant){setField('rest-title',u.restaurant.title);setField('rest-body',u.restaurant.body);setField('rest-btn',u.restaurant.btn);}
+    if(u.visit){setField('vis-title',u.visit.title);setField('vis-body',u.visit.body);setField('vis-addr',u.visit.addr);setField('vis-hours',u.visit.hours);setField('vis-res',u.visit.res);}
+    if(u.footer){setField('foot-copy',u.footer.copy);setField('foot-city',u.footer.city);}
 
-    let updated;
-    try { updated = JSON.parse(clean); } catch { throw new Error('Could not parse response'); }
-
-    if (updated.hero) {
-      setField('hero-title', updated.hero.title || '');
-      setField('hero-geo', updated.hero.geo || '');
-      setField('hero-meaning', updated.hero.meaning || '');
-      setField('hero-cta', updated.hero.cta || '');
-    }
-    if (updated.story) {
-      setField('story-label', updated.story.label || '');
-      setField('story-title', updated.story.title || '');
-      setField('story-p1', updated.story.p1 || '');
-      setField('story-p2', updated.story.p2 || '');
-      setField('stat1-n', updated.story.stat1n || '');
-      setField('stat1-l', updated.story.stat1l || '');
-      setField('stat2-n', updated.story.stat2n || '');
-      setField('stat2-l', updated.story.stat2l || '');
-      setField('stat3-n', updated.story.stat3n || '');
-      setField('stat3-l', updated.story.stat3l || '');
-    }
-    if (updated.wines) {
-      const ids = [['w1','w2','w3']];
-      ['w1','w2','w3'].forEach((pre, i) => {
-        if (!updated.wines[i]) return;
-        const w = updated.wines[i];
-        setField(pre+'-name', w.name||''); setField(pre+'-geo', w.geo||'');
-        setField(pre+'-type', w.type||''); setField(pre+'-desc', w.desc||'');
-        setField(pre+'-price', w.price||''); setField(pre+'-year', w.year||'');
-        setField(pre+'-notes', w.notes||'');
-      });
-    }
-    if (updated.quote) { setField('q-word', updated.quote.word||''); setField('q-text', updated.quote.text||''); setField('q-sub', updated.quote.sub||''); }
-    if (updated.batumi) {
-      setField('bat-title', updated.batumi.title||''); setField('bat-body', updated.batumi.body||'');
-      setField('bf1-t', updated.batumi.f1t||''); setField('bf1-i', updated.batumi.f1i||''); setField('bf1-d', updated.batumi.f1d||'');
-      setField('bf2-t', updated.batumi.f2t||''); setField('bf2-i', updated.batumi.f2i||''); setField('bf2-d', updated.batumi.f2d||'');
-      setField('bf3-t', updated.batumi.f3t||''); setField('bf3-i', updated.batumi.f3i||''); setField('bf3-d', updated.batumi.f3d||'');
-    }
-    if (updated.restaurant) { setField('rest-title', updated.restaurant.title||''); setField('rest-body', updated.restaurant.body||''); setField('rest-btn', updated.restaurant.btn||''); }
-    if (updated.visit) { setField('vis-title', updated.visit.title||''); setField('vis-body', updated.visit.body||''); setField('vis-addr', updated.visit.addr||''); setField('vis-hours', updated.visit.hours||''); setField('vis-res', updated.visit.res||''); }
-    if (updated.footer) { setField('foot-copy', updated.footer.copy||''); setField('foot-city', updated.footer.city||''); }
-
-    addMsg('Done! The changes have been applied to the editor. Click "Download index.html" whenever you\'re ready.', 'ai');
-
-    const notice = document.getElementById('save-notice');
-    notice.style.display = 'block';
-    setTimeout(() => notice.style.display = 'none', 3000);
-
-  } catch (e) {
+    addMsg('Done! Changes applied. Click "Download index.html" when ready.','ai');
+    const n=document.getElementById('save-notice');n.style.display='block';setTimeout(()=>n.style.display='none',3000);
+  } catch(e) {
     typing.remove();
-    addMsg('Sorry, I had trouble applying that change. Please try editing the field directly in the editor panel.', 'ai');
+    addMsg('Could not apply that change automatically. Please edit the field directly in the panel.','ai');
   }
-
-  btn.disabled = false;
+  document.getElementById('btn-send').disabled = false;
 }
 
 function addMsg(text, who) {
   const msgs = document.getElementById('ai-messages');
   const div = document.createElement('div');
   div.className = 'msg msg-' + who;
-  div.innerHTML = `<div class="msg-sender">${who === 'ai' ? 'Assistant' : 'You'}</div><div class="msg-bubble">${text}</div>`;
+  div.innerHTML = `<div class="msg-sender">${who==='ai'?'Assistant':'You'}</div><div class="msg-bubble">${text}</div>`;
   msgs.appendChild(div);
   msgs.scrollTop = msgs.scrollHeight;
   return div;
@@ -767,7 +931,7 @@ function addTyping() {
   const msgs = document.getElementById('ai-messages');
   const div = document.createElement('div');
   div.className = 'msg msg-ai';
-  div.innerHTML = '<div class="msg-sender">Assistant</div><div class="msg-bubble"><div class="typing"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>';
+  div.innerHTML = '<div class="msg-sender">Assistant</div><div class="typing"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
   msgs.appendChild(div);
   msgs.scrollTop = msgs.scrollHeight;
   return div;
