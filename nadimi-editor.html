@@ -321,8 +321,41 @@ Batumi, Adjara, Georgia</textarea></div>
     <!-- FOOTER -->
     <div class="section-editor" id="sec-footer">
       <div class="section-heading">Footer</div>
-      <div class="field-group"><label class="field-label">Copyright Text</label><input class="field-input" id="foot-copy" value="© 2025 Nadimi Wine · Restaurant Symposium" oninput="update()"></div>
-      <div class="field-group"><label class="field-label">City / Country</label><input class="field-input" id="foot-city" value="Batumi, Georgia" oninput="update()"></div>
+      <div class="section-desc">Edit every part of the footer — logo, links, contact info and social media.</div>
+
+      <div class="card-editor">
+        <div class="card-editor-title">Logo</div>
+        <div class="field-group"><label class="field-label">Logo Text (English)</label><input class="field-input" id="foot-logo-en" value="NADIMI" oninput="update()"></div>
+        <div class="field-group"><label class="field-label">Logo Text (Georgian)</label><input class="field-input" id="foot-logo-ge" value="ნადიმი" oninput="update()"></div>
+      </div>
+
+      <div class="card-editor">
+        <div class="card-editor-title">Left Column — Info</div>
+        <div class="field-group"><label class="field-label">Line 1 (Copyright)</label><input class="field-input" id="foot-copy" value="© 2025 Nadimi Wine · Restaurant Symposium" oninput="update()"></div>
+        <div class="field-group"><label class="field-label">Line 2 (City / Country)</label><input class="field-input" id="foot-city" value="Batumi, Georgia" oninput="update()"></div>
+        <div class="field-group"><label class="field-label">Phone</label><input class="field-input" id="foot-phone" value="+995 558 50 40 44" placeholder="+995 555 000 000" oninput="update()"></div>
+        <div class="field-group"><label class="field-label">Email</label><input class="field-input" id="foot-email" value="" placeholder="info@nadimiwine.com" oninput="update()"></div>
+        <div class="field-group"><label class="field-label">Address</label><input class="field-input" id="foot-address" value="6 Nikoloz Baratashvili St, Batumi" oninput="update()"></div>
+      </div>
+
+      <div class="card-editor">
+        <div class="card-editor-title">Navigation Links</div>
+        <div style="font-size:12px;color:#888;margin-bottom:12px;">These appear on the right side of the footer.</div>
+        <div id="footer-links-list"></div>
+        <button onclick="addFooterLink()" style="width:100%;padding:10px;background:#fdf4ee;border:2px dashed #C4622D;color:#C4622D;font-family:Inter,sans-serif;font-size:12px;font-weight:500;cursor:pointer;border-radius:8px;margin-top:4px;" onmouseover="this.style.background='#fbe8dc'" onmouseout="this.style.background='#fdf4ee'">+ Add Link</button>
+      </div>
+
+      <div class="card-editor">
+        <div class="card-editor-title">Social Media</div>
+        <div class="field-group"><label class="field-label">Instagram URL</label><input class="field-input" id="foot-instagram" value="" placeholder="https://instagram.com/yourpage" oninput="update()"></div>
+        <div class="field-group"><label class="field-label">Facebook URL</label><input class="field-input" id="foot-facebook" value="" placeholder="https://facebook.com/yourpage" oninput="update()"></div>
+        <div class="field-group"><label class="field-label">TripAdvisor URL</label><input class="field-input" id="foot-tripadvisor" value="" placeholder="https://tripadvisor.com/..." oninput="update()"></div>
+      </div>
+
+      <div class="card-editor">
+        <div class="card-editor-title">Bottom Note</div>
+        <div class="field-group"><label class="field-label">Tagline / Description</label><input class="field-input" id="foot-tagline" value="Wine of the ancient Georgian symposium tradition" oninput="update()"></div>
+      </div>
     </div>
 
     <!-- COLORS -->
@@ -892,9 +925,22 @@ footer{background:#120E08;padding:60px;display:grid;grid-template-columns:1fr au
 </div></div></section>
 
 <footer>
-  <p class="f-left">${g('foot-copy')}<br>${g('foot-city')}</p>
-  <div class="f-logo"><span class="f-logo-en">${g('hero-title')}</span><span class="f-logo-ge">ნადიმი</span></div>
-  <ul class="f-right"><li><a href="#story">Story</a></li><li><a href="#wines">Wines</a></li><li><a href="#batumi">Batumi</a></li><li><a href="#visit">Visit</a></li></ul>
+  <div class="f-left">
+    <p style="font-family:'Cinzel',serif;font-size:12px;letter-spacing:.08em;color:var(--dust);margin-bottom:6px;">${g('foot-copy')}</p>
+    <p style="font-size:12px;letter-spacing:.08em;color:var(--dust);margin-bottom:6px;">${g('foot-city')}</p>
+    ${g('foot-address') ? `<p style="font-size:12px;color:var(--dust);opacity:0.7;margin-bottom:4px;">${g('foot-address')}</p>` : ''}
+    ${g('foot-phone') ? `<p style="font-size:12px;color:var(--dust);opacity:0.7;margin-bottom:4px;"><a href="tel:${g('foot-phone').replace(/\s/g,'')}" style="color:var(--dust);text-decoration:none;">${g('foot-phone')}</a></p>` : ''}
+    ${g('foot-email') ? `<p style="font-size:12px;color:var(--dust);opacity:0.7;"><a href="mailto:${g('foot-email')}" style="color:var(--dust);text-decoration:none;">${g('foot-email')}</a></p>` : ''}
+    ${(()=>{ const socials = []; if(g('foot-instagram')) socials.push(`<a href="${g('foot-instagram')}" target="_blank" style="color:var(--dust);text-decoration:none;font-size:18px;" title="Instagram">📷</a>`); if(g('foot-facebook')) socials.push(`<a href="${g('foot-facebook')}" target="_blank" style="color:var(--dust);text-decoration:none;font-size:18px;" title="Facebook">📘</a>`); if(g('foot-tripadvisor')) socials.push(`<a href="${g('foot-tripadvisor')}" target="_blank" style="color:var(--dust);text-decoration:none;font-size:18px;" title="TripAdvisor">⭐</a>`); return socials.length ? `<div style="display:flex;gap:12px;margin-top:12px;">${socials.join('')}</div>` : ''; })()}
+  </div>
+  <div class="f-logo">
+    <span class="f-logo-en">${g('foot-logo-en') || g('hero-title')}</span>
+    <span class="f-logo-ge">${g('foot-logo-ge') || 'ნადიმი'}</span>
+    ${g('foot-tagline') ? `<span style="display:block;font-size:11px;color:var(--dust);opacity:0.5;margin-top:8px;font-style:italic;letter-spacing:.05em;max-width:200px;">${g('foot-tagline')}</span>` : ''}
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:16px;">
+    <ul class="f-right">${getFooterLinks().map(l=>`<li><a href="${l.url}">${l.label}</a></li>`).join('')}</ul>
+  </div>
 </footer>
 <script>
 const r=document.querySelectorAll('.reveal');
@@ -939,7 +985,7 @@ async function sendAI() {
     batumi:{title:g('bat-title'),body:g('bat-body'),f1t:g('bf1-t'),f1i:g('bf1-i'),f1d:g('bf1-d'),f2t:g('bf2-t'),f2i:g('bf2-i'),f2d:g('bf2-d'),f3t:g('bf3-t'),f3i:g('bf3-i'),f3d:g('bf3-d')},
     restaurant:{title:g('rest-title'),body:g('rest-body'),btn:g('rest-btn')},
     visit:{title:g('vis-title'),body:g('vis-body'),addr:g('vis-addr'),hours:g('vis-hours'),res:g('vis-res')},
-    footer:{copy:g('foot-copy'),city:g('foot-city')}
+    footer:{copy:g('foot-copy'),city:g('foot-city'),phone:g('foot-phone'),email:g('foot-email'),address:g('foot-address'),instagram:g('foot-instagram'),facebook:g('foot-facebook'),tripadvisor:g('foot-tripadvisor'),tagline:g('foot-tagline'),logoen:g('foot-logo-en'),logoge:g('foot-logo-ge')}
   };
 
   try {
@@ -965,7 +1011,13 @@ async function sendAI() {
     if(u.batumi){setField('bat-title',u.batumi.title);setField('bat-body',u.batumi.body);setField('bf1-t',u.batumi.f1t);setField('bf1-i',u.batumi.f1i);setField('bf1-d',u.batumi.f1d);setField('bf2-t',u.batumi.f2t);setField('bf2-i',u.batumi.f2i);setField('bf2-d',u.batumi.f2d);setField('bf3-t',u.batumi.f3t);setField('bf3-i',u.batumi.f3i);setField('bf3-d',u.batumi.f3d);}
     if(u.restaurant){setField('rest-title',u.restaurant.title);setField('rest-body',u.restaurant.body);setField('rest-btn',u.restaurant.btn);}
     if(u.visit){setField('vis-title',u.visit.title);setField('vis-body',u.visit.body);setField('vis-addr',u.visit.addr);setField('vis-hours',u.visit.hours);setField('vis-res',u.visit.res);}
-    if(u.footer){setField('foot-copy',u.footer.copy);setField('foot-city',u.footer.city);}
+    if(u.footer){
+    setField('foot-copy',u.footer.copy);setField('foot-city',u.footer.city);
+    setField('foot-phone',u.footer.phone);setField('foot-email',u.footer.email);
+    setField('foot-address',u.footer.address);setField('foot-instagram',u.footer.instagram);
+    setField('foot-facebook',u.footer.facebook);setField('foot-tripadvisor',u.footer.tripadvisor);
+    setField('foot-tagline',u.footer.tagline);setField('foot-logo-en',u.footer.logoen);setField('foot-logo-ge',u.footer.logoge);
+  }
 
     addMsg('Done! Changes applied. Click "Download index.html" when ready.','ai');
     const n=document.getElementById('save-notice');n.style.display='block';setTimeout(()=>n.style.display='none',3000);
@@ -976,11 +1028,49 @@ async function sendAI() {
   document.getElementById('btn-send').disabled = false;
 }
 
+// ===== FOOTER LINKS =====
+const defaultFooterLinks = [
+  { label: 'Story',  url: '#story' },
+  { label: 'Wines',  url: '#wines' },
+  { label: 'Batumi', url: '#batumi' },
+  { label: 'Visit',  url: '#visit' }
+];
+
+function getFooterLinks() {
+  const list = document.getElementById('footer-links-list');
+  if (!list) return defaultFooterLinks;
+  return Array.from(list.querySelectorAll('.footer-link-row')).map(row => ({
+    label: row.querySelector('.fl-label').value,
+    url:   row.querySelector('.fl-url').value
+  }));
+}
+
+function addFooterLink(data) {
+  const list = document.getElementById('footer-links-list');
+  if (!list) return;
+  const d = data || { label: '', url: '#' };
+  const row = document.createElement('div');
+  row.className = 'footer-link-row';
+  row.style.cssText = 'display:grid;grid-template-columns:1fr 1fr 32px;gap:8px;margin-bottom:10px;align-items:center;';
+  row.innerHTML = `
+    <input class="field-input fl-label" value="${d.label}" placeholder="Label (e.g. Story)">
+    <input class="field-input fl-url"   value="${d.url}"   placeholder="URL (e.g. #story)">
+    <button onclick="this.parentElement.remove()" style="width:32px;height:36px;background:none;border:1px solid #fcc;border-radius:6px;color:#e54;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;" title="Remove">✕</button>`;
+  list.appendChild(row);
+}
+
+function initFooterLinks() {
+  defaultFooterLinks.forEach(l => addFooterLink(l));
+}
+
+// ===== FOOTER CSS in buildHTML needs f-left updated =====
+
 // Initialize default wines on load
 function initWines() {
   defaultWines.forEach(w => addWine(w));
 }
 initWines();
+initFooterLinks();
 
 function addMsg(text, who) {
   const msgs = document.getElementById('ai-messages');
