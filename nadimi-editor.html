@@ -153,13 +153,40 @@ body { font-family: 'Inter', sans-serif; background: #F5F5F3; color: #1a1a1a; he
       <div class="section-heading">Hero Section</div>
       <div class="section-desc">The first thing visitors see.</div>
 
-      <div class="field-label">Hero Background Photo</div>
+      <div class="field-label">Hero Background (right side)</div>
       <div class="img-upload-zone" id="zone-hero-bg" onclick="triggerUpload('upload-hero-bg')">
         <input type="file" accept="image/*" id="upload-hero-bg" class="img-hidden-input" onchange="handleImage(event,'hero-bg','zone-hero-bg','preview-hero-bg','landscape')">
         <div class="img-upload-placeholder" id="ph-hero-bg">
           <div class="img-upload-icon">🌅</div>
           <div class="img-upload-text">Click to upload hero background</div>
           <div class="img-upload-sub">JPG, PNG, WEBP — recommended 1800×900px</div>
+        </div>
+      </div>
+
+      <div class="field-label" style="margin-top:4px;">Bottle / Right Side Image</div>
+      <div style="background:#f0ece6;border-radius:8px;padding:12px;margin-bottom:6px;font-size:12px;color:#888;line-height:1.5;">
+        Upload a photo of your wine bottle, label, or any product image. It will replace the illustrated bottle on the right side of the hero.
+      </div>
+      <div class="img-upload-zone" id="zone-hero-bottle" onclick="triggerUpload('upload-hero-bottle')">
+        <input type="file" accept="image/*" id="upload-hero-bottle" class="img-hidden-input" onchange="handleImage(event,'hero-bottle','zone-hero-bottle','preview-hero-bottle','portrait')">
+        <div class="img-upload-placeholder" id="ph-hero-bottle">
+          <div class="img-upload-icon">🍾</div>
+          <div class="img-upload-text">Click to upload bottle or label photo</div>
+          <div class="img-upload-sub">Portrait orientation recommended (e.g. 600×900px)</div>
+        </div>
+      </div>
+      <div id="hero-bottle-style-row" style="display:none; margin-bottom:18px;">
+        <label class="field-label">Image Display Style</label>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:#555;cursor:pointer;">
+            <input type="radio" name="bottle-style" value="contain" checked onchange="update()"> Fit whole image
+          </label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:#555;cursor:pointer;">
+            <input type="radio" name="bottle-style" value="cover" onchange="update()"> Fill & crop
+          </label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:#555;cursor:pointer;">
+            <input type="radio" name="bottle-style" value="natural" onchange="update()"> Natural size
+          </label>
         </div>
       </div>
 
@@ -205,82 +232,12 @@ body { font-family: 'Inter', sans-serif; background: #F5F5F3; color: #1a1a1a; he
     <!-- WINES -->
     <div class="section-editor" id="sec-wines">
       <div class="section-heading">Wine Collection</div>
-      <div class="section-desc">Edit your three signature wines.</div>
-
-      <div class="card-editor">
-        <div class="card-editor-title">Wine 1 — Amber</div>
-        <div class="field-label">Wine Photo</div>
-        <div class="img-upload-zone" id="zone-w1-img" onclick="triggerUpload('upload-w1-img')">
-          <input type="file" accept="image/*" id="upload-w1-img" class="img-hidden-input" onchange="handleImage(event,'w1-img','zone-w1-img','preview-w1-img','square')">
-          <div class="img-upload-placeholder" id="ph-w1-img">
-            <div class="img-upload-icon">🍾</div>
-            <div class="img-upload-text">Upload wine bottle or label photo</div>
-            <div class="img-upload-sub">Square crop recommended</div>
-          </div>
-        </div>
-        <div class="field-group"><label class="field-label">Wine Name</label><input class="field-input" id="w1-name" value="Rkatsiteli" oninput="update()"></div>
-        <div class="field-row">
-          <div class="field-group"><label class="field-label">Georgian Name</label><input class="field-input" id="w1-geo" value="რქაწითელი" oninput="update()"></div>
-          <div class="field-group"><label class="field-label">Type / Style</label><input class="field-input" id="w1-type" value="Amber · Qvevri" oninput="update()"></div>
-        </div>
-        <div class="field-group"><label class="field-label">Description</label><textarea class="field-textarea" id="w1-desc" oninput="update()">Our flagship amber wine, skin-contact fermented in traditional clay qvevri. Georgia's most celebrated white grape delivers a wine of stunning complexity and depth.</textarea></div>
-        <div class="field-row">
-          <div class="field-group"><label class="field-label">Price</label><input class="field-input" id="w1-price" value="€36" oninput="update()"></div>
-          <div class="field-group"><label class="field-label">Vintage</label><input class="field-input" id="w1-year" value="2021" oninput="update()"></div>
-        </div>
-        <div class="field-group"><label class="field-label">Tasting Notes (comma separated)</label><input class="field-input" id="w1-notes" value="Dried fig, Beeswax, Walnut, Tannic" oninput="update()"></div>
-      </div>
-
-      <div class="card-editor">
-        <div class="card-editor-title">Wine 2 — Red</div>
-        <div class="field-label">Wine Photo</div>
-        <div class="img-upload-zone" id="zone-w2-img" onclick="triggerUpload('upload-w2-img')">
-          <input type="file" accept="image/*" id="upload-w2-img" class="img-hidden-input" onchange="handleImage(event,'w2-img','zone-w2-img','preview-w2-img','square')">
-          <div class="img-upload-placeholder" id="ph-w2-img">
-            <div class="img-upload-icon">🍾</div>
-            <div class="img-upload-text">Upload wine bottle or label photo</div>
-            <div class="img-upload-sub">Square crop recommended</div>
-          </div>
-        </div>
-        <div class="field-group"><label class="field-label">Wine Name</label><input class="field-input" id="w2-name" value="Saperavi" oninput="update()"></div>
-        <div class="field-row">
-          <div class="field-group"><label class="field-label">Georgian Name</label><input class="field-input" id="w2-geo" value="საფერავი" oninput="update()"></div>
-          <div class="field-group"><label class="field-label">Type / Style</label><input class="field-input" id="w2-type" value="Red · Oak Aged" oninput="update()"></div>
-        </div>
-        <div class="field-group"><label class="field-label">Description</label><textarea class="field-textarea" id="w2-desc" oninput="update()">Georgia's great red grape — ink-dark, full-bodied, with remarkable depth. Aged 18 months in Georgian oak, it is powerful yet deeply civilised, with a long velvety finish.</textarea></div>
-        <div class="field-row">
-          <div class="field-group"><label class="field-label">Price</label><input class="field-input" id="w2-price" value="€42" oninput="update()"></div>
-          <div class="field-group"><label class="field-label">Vintage</label><input class="field-input" id="w2-year" value="2022" oninput="update()"></div>
-        </div>
-        <div class="field-group"><label class="field-label">Tasting Notes (comma separated)</label><input class="field-input" id="w2-notes" value="Dark plum, Blackberry, Clove, Tobacco" oninput="update()"></div>
-      </div>
-
-      <div class="card-editor">
-        <div class="card-editor-title">Wine 3 — White</div>
-        <div class="field-label">Wine Photo</div>
-        <div class="img-upload-zone" id="zone-w3-img" onclick="triggerUpload('upload-w3-img')">
-          <input type="file" accept="image/*" id="upload-w3-img" class="img-hidden-input" onchange="handleImage(event,'w3-img','zone-w3-img','preview-w3-img','square')">
-          <div class="img-upload-placeholder" id="ph-w3-img">
-            <div class="img-upload-icon">🍾</div>
-            <div class="img-upload-text">Upload wine bottle or label photo</div>
-            <div class="img-upload-sub">Square crop recommended</div>
-          </div>
-        </div>
-        <div class="field-group"><label class="field-label">Wine Name</label><input class="field-input" id="w3-name" value="Mtsvane" oninput="update()"></div>
-        <div class="field-row">
-          <div class="field-group"><label class="field-label">Georgian Name</label><input class="field-input" id="w3-geo" value="მწვანე" oninput="update()"></div>
-          <div class="field-group"><label class="field-label">Type / Style</label><input class="field-input" id="w3-type" value="White · Stainless" oninput="update()"></div>
-        </div>
-        <div class="field-group"><label class="field-label">Description</label><textarea class="field-textarea" id="w3-desc" oninput="update()">Light and aromatic, Mtsvane ("the green one") is perfect with Batumi's fresh seafood. Pale gold, floral, with bright citrus acidity and a clean, mineral finish.</textarea></div>
-        <div class="field-row">
-          <div class="field-group"><label class="field-label">Price</label><input class="field-input" id="w3-price" value="€24" oninput="update()"></div>
-          <div class="field-group"><label class="field-label">Vintage</label><input class="field-input" id="w3-year" value="2023" oninput="update()"></div>
-        </div>
-        <div class="field-group"><label class="field-label">Tasting Notes (comma separated)</label><input class="field-input" id="w3-notes" value="White peach, Jasmine, Lime, Mineral" oninput="update()"></div>
-      </div>
+      <div class="section-desc">Add, edit or remove wines — no limit.</div>
+      <div id="wines-list"></div>
+      <button onclick="addWine()" style="width:100%;padding:14px;background:#fdf4ee;border:2px dashed #C4622D;color:#C4622D;font-family:Inter,sans-serif;font-size:13px;font-weight:500;cursor:pointer;border-radius:8px;margin-top:4px;transition:background 0.2s;" onmouseover="this.style.background='#fbe8dc'" onmouseout="this.style.background='#fdf4ee'">+ Add Wine</button>
     </div>
 
-    <!-- QUOTE -->
+        <!-- QUOTE -->
     <div class="section-editor" id="sec-quote">
       <div class="section-heading">Quote Banner</div>
       <div class="field-group"><label class="field-label">Large Background Word</label><input class="field-input" id="q-word" value="Symposium" oninput="update()"></div>
@@ -395,6 +352,15 @@ Batumi, Adjara, Georgia</textarea></div>
       </div>
 
       <div class="card-editor">
+        <div class="card-editor-title">Bottle / Hero Right Side</div>
+        <div style="font-size:12px;color:#888;margin-bottom:10px;line-height:1.5;">Replaces the illustrated bottle on the right half of the hero. Use a real photo of your wine bottle or label.</div>
+        <div class="img-upload-zone" id="zone-hero-bottle2" onclick="triggerUpload('upload-hero-bottle2')">
+          <input type="file" accept="image/*" id="upload-hero-bottle2" class="img-hidden-input" onchange="handleImage(event,'hero-bottle','zone-hero-bottle2','preview-hero-bottle2','portrait'); syncZone('hero-bottle','zone-hero-bottle','preview-hero-bottle')">
+          <div class="img-upload-placeholder" id="ph-hero-bottle2"><div class="img-upload-icon">🍾</div><div class="img-upload-text">Bottle or label photo (portrait)</div></div>
+        </div>
+      </div>
+
+      <div class="card-editor">
         <div class="card-editor-title">Story Photo</div>
         <div class="img-upload-zone" id="zone-story-img2" onclick="triggerUpload('upload-story-img2')">
           <input type="file" accept="image/*" id="upload-story-img2" class="img-hidden-input" onchange="handleImage(event,'story-img','zone-story-img2','preview-story-img2','portrait'); syncZone('story-img','zone-story-img','preview-story-img')">
@@ -486,6 +452,86 @@ Batumi, Adjara, Georgia</textarea></div>
 // Image storage: key -> base64 data URL
 const images = {};
 let themeColors = { primary: '#C4622D', accent: '#D4A853', dark: '#1C1610' };
+let wineCounter = 0;
+
+// Initial wines data
+const defaultWines = [
+  { name:'Rkatsiteli', geo:'რქაწითელი', type:'Amber · Qvevri', desc:"Our flagship amber wine, skin-contact fermented in traditional clay qvevri. Georgia's most celebrated white grape delivers a wine of stunning complexity and depth.", price:'€36', year:'2021', notes:'Dried fig, Beeswax, Walnut, Tannic', dotColor:'#C9995A' },
+  { name:'Saperavi',   geo:'საფერავი',  type:'Red · Oak Aged',  desc:"Georgia's great red grape — ink-dark, full-bodied, with remarkable depth. Aged 18 months in Georgian oak, it is powerful yet deeply civilised.",              price:'€42', year:'2022', notes:'Dark plum, Blackberry, Clove, Tobacco', dotColor:'#6B1A2A' },
+  { name:'Mtsvane',    geo:'მწვანე',    type:'White · Stainless',desc:"Light and aromatic, Mtsvane is perfect with Batumi's fresh seafood. Pale gold, floral, with bright citrus acidity and a clean, mineral finish.",               price:'€24', year:'2023', notes:'White peach, Jasmine, Lime, Mineral', dotColor:'#F0D080' }
+];
+
+function getWines() {
+  const list = document.getElementById('wines-list');
+  if (!list) return [];
+  return Array.from(list.querySelectorAll('.wine-card-editor')).map(card => {
+    const id = card.dataset.id;
+    return {
+      name:  card.querySelector('.w-name').value,
+      geo:   card.querySelector('.w-geo').value,
+      type:  card.querySelector('.w-type').value,
+      desc:  card.querySelector('.w-desc').value,
+      price: card.querySelector('.w-price').value,
+      year:  card.querySelector('.w-year').value,
+      notes: card.querySelector('.w-notes').value,
+      dotColor: card.querySelector('.w-dot-color').value,
+      imgKey: 'wine-img-' + id
+    };
+  });
+}
+
+function addWine(data) {
+  wineCounter++;
+  const id = wineCounter;
+  const imgKey = 'wine-img-' + id;
+  const zoneId = 'zone-wine-' + id;
+  const previewId = 'preview-wine-' + id;
+  const uploadId = 'upload-wine-' + id;
+  const d = data || { name:'', geo:'', type:'', desc:'', price:'', year:'', notes:'', dotColor:'#C9995A' };
+
+  const card = document.createElement('div');
+  card.className = 'card-editor wine-card-editor';
+  card.dataset.id = id;
+  card.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+      <div class="card-editor-title" style="margin-bottom:0;">Wine #${id}</div>
+      <button onclick="removeWine(this)" style="background:none;border:none;color:#e54;cursor:pointer;font-size:13px;font-family:Inter,sans-serif;padding:4px 8px;border-radius:4px;" onmouseover="this.style.background='#fff0f0'" onmouseout="this.style.background='none'">✕ Remove</button>
+    </div>
+    <div class="field-label">Wine Photo</div>
+    <div class="img-upload-zone" id="${zoneId}" onclick="triggerUpload('${uploadId}')">
+      <input type="file" accept="image/*" id="${uploadId}" class="img-hidden-input" onchange="handleImage(event,'${imgKey}','${zoneId}','${previewId}','square')">
+      <div class="img-upload-placeholder" id="ph-${zoneId}">
+        <div class="img-upload-icon">🍾</div>
+        <div class="img-upload-text">Upload wine bottle or label photo</div>
+        <div class="img-upload-sub">Square crop recommended</div>
+      </div>
+    </div>
+    <div class="field-group"><label class="field-label">Wine Name</label><input class="field-input w-name" value="${d.name}" placeholder="e.g. Rkatsiteli"></div>
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Georgian Name</label><input class="field-input w-geo" value="${d.geo}" placeholder="e.g. რქაწითელი"></div>
+      <div class="field-group"><label class="field-label">Type / Style</label><input class="field-input w-type" value="${d.type}" placeholder="e.g. Amber · Qvevri"></div>
+    </div>
+    <div class="field-group"><label class="field-label">Description</label><textarea class="field-textarea w-desc" style="min-height:80px">${d.desc}</textarea></div>
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Price</label><input class="field-input w-price" value="${d.price}" placeholder="€36"></div>
+      <div class="field-group"><label class="field-label">Vintage</label><input class="field-input w-year" value="${d.year}" placeholder="2023"></div>
+    </div>
+    <div class="field-group"><label class="field-label">Tasting Notes (comma separated)</label><input class="field-input w-notes" value="${d.notes}" placeholder="Cherry, Oak, Spice"></div>
+    <div class="field-group" style="display:flex;align-items:center;gap:10px;">
+      <label class="field-label" style="margin-bottom:0;white-space:nowrap;">Label dot color</label>
+      <input type="color" class="w-dot-color" value="${d.dotColor}" style="width:40px;height:32px;border:1px solid #e0e0e0;border-radius:6px;cursor:pointer;background:none;padding:2px;">
+    </div>`;
+  document.getElementById('wines-list').appendChild(card);
+}
+
+function removeWine(btn) {
+  const card = btn.closest('.wine-card-editor');
+  if (document.querySelectorAll('.wine-card-editor').length <= 1) {
+    alert('You need at least one wine!');
+    return;
+  }
+  if (confirm('Remove this wine?')) card.remove();
+}
 
 function triggerUpload(inputId) {
   document.getElementById(inputId).click();
@@ -504,28 +550,28 @@ function handleImage(event, key, zoneId, previewId, aspect) {
 
 function renderZone(key, zoneId, previewId, aspect) {
   const zone = document.getElementById(zoneId);
-  const ph = zone.querySelector('.img-upload-placeholder');
   if (!zone) return;
+  const ph = zone.querySelector('.img-upload-placeholder');
   if (ph) ph.style.display = 'none';
-  // Remove existing preview
   const old = document.getElementById(previewId);
   if (old) old.remove();
   const oldCtrl = zone.querySelector('.img-controls');
   if (oldCtrl) oldCtrl.remove();
-  // Add image
   const img = document.createElement('img');
   img.id = previewId;
   img.src = images[key];
   img.className = 'img-preview ' + (aspect === 'portrait' ? 'portrait' : aspect === 'square' ? 'square' : '');
   zone.classList.add('has-image');
-  // Insert before hidden input
   const inp = zone.querySelector('input[type=file]');
   zone.insertBefore(img, inp);
-  // Controls bar
   const ctrl = document.createElement('div');
   ctrl.className = 'img-controls';
   ctrl.innerHTML = `<button class="img-btn" onclick="event.stopPropagation();triggerUpload('${inp.id}')">Change photo</button><button class="img-btn danger" onclick="event.stopPropagation();removeImage('${key}','${zoneId}','${previewId}')">Remove</button>`;
   zone.appendChild(ctrl);
+  if (key === 'hero-bottle') {
+    const row = document.getElementById('hero-bottle-style-row');
+    if (row) row.style.display = 'block';
+  }
 }
 
 function removeImage(key, zoneId, previewId) {
@@ -538,6 +584,10 @@ function removeImage(key, zoneId, previewId) {
   const ph = zone.querySelector('.img-upload-placeholder');
   if (ph) ph.style.display = '';
   zone.classList.remove('has-image');
+  if (key === 'hero-bottle') {
+    const row = document.getElementById('hero-bottle-style-row');
+    if (row) row.style.display = 'none';
+  }
 }
 
 // Sync duplicate zones (Photos overview mirrors individual section zones)
@@ -588,13 +638,36 @@ function imgTag(key, style) {
 
 function buildHTML() {
   const p = themeColors.primary, a = themeColors.accent, d = themeColors.dark;
-  const w1notes = g('w1-notes').split(',').map(n=>`<span class="taste-chip">${n.trim()}</span>`).join('');
-  const w2notes = g('w2-notes').split(',').map(n=>`<span class="taste-chip">${n.trim()}</span>`).join('');
-  const w3notes = g('w3-notes').split(',').map(n=>`<span class="taste-chip">${n.trim()}</span>`).join('');
+  const wines = getWines();
 
   const heroBgStyle = images['hero-bg']
     ? `background-image: url('${images['hero-bg']}'); background-size: cover; background-position: center;`
     : `background: linear-gradient(135deg, #2A1F12 0%, #1C1610 60%);`;
+
+  // Bottle / hero right side
+  const bottleStyle = document.querySelector('input[name="bottle-style"]:checked')?.value || 'contain';
+  const heroRightContent = images['hero-bottle']
+    ? (() => {
+        if (bottleStyle === 'cover') {
+          return `<img src="${images['hero-bottle']}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" alt="">`;
+        } else if (bottleStyle === 'natural') {
+          return `<img src="${images['hero-bottle']}" style="max-width:80%;max-height:80%;object-fit:contain;position:relative;z-index:2;display:block;" alt="">`;
+        } else {
+          return `<img src="${images['hero-bottle']}" style="max-width:65%;max-height:80vh;object-fit:contain;position:relative;z-index:2;display:block;" alt="">`;
+        }
+      })()
+    : `<svg class="bottle-svg" viewBox="0 0 200 500" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <path d="M80 0 L80 60 Q40 100 30 180 L30 420 Q30 480 100 480 Q170 480 170 420 L170 180 Q160 100 120 60 L120 0 Z" fill="#2A1A08" stroke="${a}" stroke-width="1" opacity="0.9"/>
+      <rect x="42" y="220" width="116" height="140" rx="2" fill="#1C1610" stroke="${a}" stroke-width="0.8"/>
+      <text x="100" y="268" text-anchor="middle" font-family="Cinzel,serif" font-size="13" fill="${a}" letter-spacing="3">${g('hero-title')}</text>
+      <text x="100" y="286" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="9" fill="rgba(212,168,83,0.5)" letter-spacing="2" font-style="italic">ნადიმი</text>
+      <line x1="60" y1="296" x2="140" y2="296" stroke="rgba(212,168,83,0.2)" stroke-width="0.5"/>
+      <circle cx="100" cy="320" r="16" fill="none" stroke="rgba(212,168,83,0.25)" stroke-width="0.5"/>
+      <circle cx="100" cy="320" r="4" fill="rgba(212,168,83,0.3)"/>
+      <text x="100" y="354" text-anchor="middle" font-family="Cinzel,serif" font-size="8" fill="rgba(212,168,83,0.4)" letter-spacing="2">BATUMI · GEORGIA</text>
+      <rect x="76" y="30" width="48" height="32" rx="1" fill="#1C1610" stroke="${a}" stroke-width="0.6"/>
+      <text x="100" y="51" text-anchor="middle" font-family="Cinzel,serif" font-size="7" fill="${a}" letter-spacing="1.5">${g('w1-year')}</text>
+    </svg>`;
 
   const storyImgContent = images['story-img']
     ? `<img src="${images['story-img']}" style="width:100%;height:100%;object-fit:cover;display:block;" alt="">`
@@ -608,15 +681,14 @@ function buildHTML() {
     ? `<img src="${images['rest-img']}" style="width:100%;height:100%;object-fit:cover;display:block;" alt="">`
     : `<span style="font-size:52px;color:rgba(212,168,83,0.18);font-style:italic;display:block;margin-bottom:16px;">სიმპოზიუმი</span><p style="font-size:14px;letter-spacing:0.08em;color:rgba(212,168,83,0.5);font-style:italic;text-transform:uppercase;line-height:1.7;">Restaurant Symposium<br>Batumi, Georgia<br><br>"Where wine, food and<br>conversation become one"</p>`;
 
-  const w1CardTop = images['w1-img']
-    ? `<div style="height:180px;overflow:hidden;margin:-48px -36px 24px;"><img src="${images['w1-img']}" style="width:100%;height:180px;object-fit:cover;" alt=""></div>`
-    : '';
-  const w2CardTop = images['w2-img']
-    ? `<div style="height:180px;overflow:hidden;margin:-48px -36px 24px;"><img src="${images['w2-img']}" style="width:100%;height:180px;object-fit:cover;" alt=""></div>`
-    : '';
-  const w3CardTop = images['w3-img']
-    ? `<div style="height:180px;overflow:hidden;margin:-48px -36px 24px;"><img src="${images['w3-img']}" style="width:100%;height:180px;object-fit:cover;" alt=""></div>`
-    : '';
+  const wineCardsHTML = wines.map((w, i) => {
+    const notes = w.notes.split(',').map(n=>`<span class="taste-chip">${n.trim()}</span>`).join('');
+    const imgTop = images[w.imgKey]
+      ? `<div style="height:180px;overflow:hidden;margin:-48px -36px 24px;"><img src="${images[w.imgKey]}" style="width:100%;height:180px;object-fit:cover;" alt=""></div>`
+      : '';
+    const delay = i === 0 ? '' : i === 1 ? ' delay-1' : i === 2 ? ' delay-2' : ' delay-2';
+    return `<div class="wine-card reveal${delay}">${imgTop}<div class="wine-card-top"><span class="wine-color-dot" style="background:${w.dotColor};"></span><span class="wine-type-label">${w.type}</span></div><h3 class="wine-name">${w.name}</h3><p class="wine-geo">${w.geo}</p><p class="wine-desc">${w.desc}</p><div class="tasting-row">${notes}</div><div class="wine-footer"><span class="wine-price">${w.price}</span><span class="wine-year">${w.year}</span></div></div>`;
+  }).join('');
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -670,7 +742,7 @@ section{padding:110px 60px;}
 .wines .label{color:var(--o);}
 .wines-header{text-align:center;max-width:600px;margin:0 auto 70px;}
 .wines-header .body-text{margin:0 auto;text-align:center;color:var(--dust);}
-.wines-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(212,168,83,0.1);}
+.wines-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:rgba(212,168,83,0.1);}
 .wine-card{background:#1C1610;padding:48px 36px;transition:background .4s;overflow:hidden;}
 .wine-card:hover{background:#231a0f;}
 .wine-card-top{border-bottom:1px solid rgba(212,168,83,0.12);padding-bottom:24px;margin-bottom:24px;}
@@ -752,18 +824,7 @@ footer{background:#120E08;padding:60px;display:grid;grid-template-columns:1fr au
   </div>
   <div class="hero-right">
     <div class="hero-circle"></div><div class="hero-circle"></div><div class="hero-circle"></div>
-    <svg class="bottle-svg" viewBox="0 0 200 500" xmlns="http://www.w3.org/2000/svg" fill="none">
-      <path d="M80 0 L80 60 Q40 100 30 180 L30 420 Q30 480 100 480 Q170 480 170 420 L170 180 Q160 100 120 60 L120 0 Z" fill="#2A1A08" stroke="${a}" stroke-width="1" opacity="0.9"/>
-      <rect x="42" y="220" width="116" height="140" rx="2" fill="#1C1610" stroke="${a}" stroke-width="0.8"/>
-      <text x="100" y="268" text-anchor="middle" font-family="Cinzel,serif" font-size="13" fill="${a}" letter-spacing="3">${g('hero-title')}</text>
-      <text x="100" y="286" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="9" fill="rgba(212,168,83,0.5)" letter-spacing="2" font-style="italic">ნადიმი</text>
-      <line x1="60" y1="296" x2="140" y2="296" stroke="rgba(212,168,83,0.2)" stroke-width="0.5"/>
-      <circle cx="100" cy="320" r="16" fill="none" stroke="rgba(212,168,83,0.25)" stroke-width="0.5"/>
-      <circle cx="100" cy="320" r="4" fill="rgba(212,168,83,0.3)"/>
-      <text x="100" y="354" text-anchor="middle" font-family="Cinzel,serif" font-size="8" fill="rgba(212,168,83,0.4)" letter-spacing="2">BATUMI · GEORGIA</text>
-      <rect x="76" y="30" width="48" height="32" rx="1" fill="#1C1610" stroke="${a}" stroke-width="0.6"/>
-      <text x="100" y="51" text-anchor="middle" font-family="Cinzel,serif" font-size="7" fill="${a}" letter-spacing="1.5">${g('w1-year')}</text>
-    </svg>
+    ${heroRightContent}
   </div>
 </div>
 
@@ -785,9 +846,7 @@ footer{background:#120E08;padding:60px;display:grid;grid-template-columns:1fr au
 <section id="wines" class="wines"><div class="container">
   <div class="wines-header reveal"><span class="label">The Collection</span><h2 class="title">Wines of Georgia</h2><p class="body-text">Three expressions of ancient Georgian grape varieties, crafted for the modern table.</p></div>
   <div class="wines-grid">
-    <div class="wine-card reveal">${w1CardTop}<div class="wine-card-top"><span class="wine-color-dot" style="background:#C9995A;"></span><span class="wine-type-label">${g('w1-type')}</span></div><h3 class="wine-name">${g('w1-name')}</h3><p class="wine-geo">${g('w1-geo')}</p><p class="wine-desc">${g('w1-desc')}</p><div class="tasting-row">${w1notes}</div><div class="wine-footer"><span class="wine-price">${g('w1-price')}</span><span class="wine-year">${g('w1-year')}</span></div></div>
-    <div class="wine-card reveal delay-1">${w2CardTop}<div class="wine-card-top"><span class="wine-color-dot" style="background:#6B1A2A;"></span><span class="wine-type-label">${g('w2-type')}</span></div><h3 class="wine-name">${g('w2-name')}</h3><p class="wine-geo">${g('w2-geo')}</p><p class="wine-desc">${g('w2-desc')}</p><div class="tasting-row">${w2notes}</div><div class="wine-footer"><span class="wine-price">${g('w2-price')}</span><span class="wine-year">${g('w2-year')}</span></div></div>
-    <div class="wine-card reveal delay-2">${w3CardTop}<div class="wine-card-top"><span class="wine-color-dot" style="background:#F0D080;"></span><span class="wine-type-label">${g('w3-type')}</span></div><h3 class="wine-name">${g('w3-name')}</h3><p class="wine-geo">${g('w3-geo')}</p><p class="wine-desc">${g('w3-desc')}</p><div class="tasting-row">${w3notes}</div><div class="wine-footer"><span class="wine-price">${g('w3-price')}</span><span class="wine-year">${g('w3-year')}</span></div></div>
+    ${wineCardsHTML}
   </div>
 </div></section>
 
@@ -916,6 +975,12 @@ async function sendAI() {
   }
   document.getElementById('btn-send').disabled = false;
 }
+
+// Initialize default wines on load
+function initWines() {
+  defaultWines.forEach(w => addWine(w));
+}
+initWines();
 
 function addMsg(text, who) {
   const msgs = document.getElementById('ai-messages');
