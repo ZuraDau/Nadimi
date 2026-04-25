@@ -123,7 +123,11 @@ body { font-family: 'Inter', sans-serif; background: #F5F5F3; color: #1a1a1a; he
     <div class="topbar-logo">NADIMI Editor</div>
     <div class="topbar-site">zuradau.github.io/Nadimi</div>
   </div>
-  <button class="btn-download" onclick="downloadSite()">⬇ Download index.html</button>
+  <div style="display:flex;gap:10px;align-items:center;">
+    <span id="autosave-status" style="font-size:11px;color:rgba(242,232,213,0.35);letter-spacing:0.05em;">Auto-save on</span>
+    <button onclick="clearSave()" style="background:none;border:1px solid rgba(242,232,213,0.2);color:rgba(242,232,213,0.5);padding:7px 14px;font-size:11px;font-family:Inter,sans-serif;cursor:pointer;border-radius:6px;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(242,232,213,0.5)';this.style.color='rgba(242,232,213,0.8)'" onmouseout="this.style.borderColor='rgba(242,232,213,0.2)';this.style.color='rgba(242,232,213,0.5)'">↺ Reset</button>
+    <button class="btn-download" onclick="downloadSite()">⬇ Download index.html</button>
+  </div>
 </div>
 
 <div class="main">
@@ -1066,11 +1070,155 @@ function initFooterLinks() {
 // ===== FOOTER CSS in buildHTML needs f-left updated =====
 
 // Initialize default wines on load
-function initWines() {
-  defaultWines.forEach(w => addWine(w));
+function initWines(wines) {
+  (wines || defaultWines).forEach(w => addWine(w));
 }
-initWines();
-initFooterLinks();
+
+// ===== AUTO-SAVE / LOAD =====
+const SAVE_KEY = 'nadimi_editor_v1';
+
+function collectAllFields() {
+  // Plain text fields
+  const fields = {};
+  document.querySelectorAll('.field-input, .field-textarea').forEach(el => {
+    if (el.id) fields[el.id] = el.value;
+  });
+  // Radio buttons
+  const bottleStyle = document.querySelector('input[name="bottle-style"]:checked');
+  if (bottleStyle) fields['_bottle_style'] = bottleStyle.value;
+  // Theme colors
+  fields['_theme'] = JSON.stringify(themeColors);
+  // Wines
+  fields['_wines'] = JSON.stringify(getWines().map(w => ({
+    name: w.name, geo: w.geo, type: w.type, desc: w.desc,
+    price: w.price, year: w.year, notes: w.notes, dotColor: w.dotColor
+  })));
+  // Footer links
+  fields['_footerLinks'] = JSON.stringify(getFooterLinks());
+  // Images (base64)
+  fields['_images'] = JSON.stringify(images);
+  return fields;
+}
+
+function saveAll() {
+  try {
+    const data = collectAllFields();
+    localStorage.setItem(SAVE_KEY, JSON.stringify(data));
+    showSaveBadge();
+  } catch(e) {
+    console.warn('Save failed:', e);
+  }
+}
+
+function loadAll() {
+  try {
+    const raw = localStorage.getItem(SAVE_KEY);
+    if (!raw) return false;
+    const data = JSON.parse(raw);
+
+    // Restore images first
+    if (data['_images']) {
+      const imgs = JSON.parse(data['_images']);
+      Object.assign(images, imgs);
+    }
+
+    // Restore wines
+    const savedWines = data['_wines'] ? JSON.parse(data['_wines']) : null;
+    initWines(savedWines);
+
+    // Restore footer links
+    const savedLinks = data['_footerLinks'] ? JSON.parse(data['_footerLinks']) : null;
+    if (savedLinks) savedLinks.forEach(l => addFooterLink(l));
+    else initFooterLinks();
+
+    // Restore plain fields (after wines/links are rendered)
+    Object.entries(data).forEach(([id, val]) => {
+      if (id.startsWith('_')) return;
+      const el = document.getElementById(id);
+      if (el) el.value = val;
+    });
+
+    // Restore radio
+    if (data['_bottle_style']) {
+      const radio = document.querySelector(`input[name="bottle-style"][value="${data['_bottle_style']}"]`);
+      if (radio) radio.checked = true;
+    }
+
+    // Restore theme
+    if (data['_theme']) {
+      themeColors = JSON.parse(data['_theme']);
+      // Highlight the correct swatch
+      document.querySelectorAll('.color-circle').forEach(c => {
+        c.classList.toggle('selected', c.style.background === themeColors.primary ||
+          c.parentElement.onclick?.toString().includes(themeColors.primary));
+      });
+    }
+
+    // Re-render any uploaded image zones
+    Object.keys(images).forEach(key => {
+      // hero-bg, hero-bottle, story-img, bat-img, rest-img
+      const zoneMap = {
+        'hero-bg':     ['zone-hero-bg',     'preview-hero-bg',     'landscape'],
+        'hero-bottle': ['zone-hero-bottle', 'preview-hero-bottle', 'portrait'],
+        'story-img':   ['zone-story-img',   'preview-story-img',   'portrait'],
+        'bat-img':     ['zone-bat-img',     'preview-bat-img',     'landscape'],
+        'rest-img':    ['zone-rest-img',    'preview-rest-img',    'landscape'],
+      };
+      if (zoneMap[key]) {
+        const [zId, pId, aspect] = zoneMap[key];
+        if (document.getElementById(zId)) renderZone(key, zId, pId, aspect);
+      } else if (key.startsWith('wine-img-')) {
+        // wine images: key = wine-img-N, zone = zone-wine-N
+        const n = key.replace('wine-img-', '');
+        const zId = 'zone-wine-' + n;
+        const pId = 'preview-wine-' + n;
+        if (document.getElementById(zId)) renderZone(key, zId, pId, 'square');
+      }
+    });
+
+    return true;
+  } catch(e) {
+    console.warn('Load failed:', e);
+    return false;
+  }
+}
+
+function clearSave() {
+  if (confirm('This will reset the editor to default content. Are you sure?')) {
+    localStorage.removeItem(SAVE_KEY);
+    location.reload();
+  }
+}
+
+let saveTimer = null;
+function autoSave() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveAll, 800);
+}
+
+function showSaveBadge() {
+  let badge = document.getElementById('save-badge');
+  if (!badge) {
+    badge = document.createElement('div');
+    badge.id = 'save-badge';
+    badge.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#22c55e;color:white;padding:8px 18px;border-radius:20px;font-size:12px;font-family:Inter,sans-serif;font-weight:500;z-index:9999;opacity:1;transition:opacity 0.5s;pointer-events:none;';
+    document.body.appendChild(badge);
+  }
+  badge.textContent = '✓ Saved automatically';
+  badge.style.opacity = '1';
+  setTimeout(() => badge.style.opacity = '0', 2000);
+}
+
+// Attach auto-save to all inputs
+document.addEventListener('input', autoSave);
+document.addEventListener('change', autoSave);
+
+// Load on start
+const loaded = loadAll();
+if (!loaded) {
+  initWines();
+  initFooterLinks();
+}
 
 function addMsg(text, who) {
   const msgs = document.getElementById('ai-messages');
